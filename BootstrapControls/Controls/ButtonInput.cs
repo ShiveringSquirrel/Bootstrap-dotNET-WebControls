@@ -35,6 +35,28 @@ namespace BootstrapControls.Controls
             }
         }
 
+        [Category("Appearance")]
+        [Browsable(true)]
+        [DefaultValue("False")]
+        [Description("Does this button have a block style (btn-block)")]
+        [Localizable(false)]
+        public bool IsBlock
+        {
+            get
+            {
+                if (ViewState["IsBlock"] is bool)
+                {
+                    return (bool)ViewState["IsBlock"];
+                }
+                return false;
+            }
+            set
+            {
+                ViewState["IsBlock"] = value;
+
+            }
+        }
+
         protected override void Render(HtmlTextWriter writer)
         {
             string cssClass = "btn ";
@@ -62,6 +84,11 @@ namespace BootstrapControls.Controls
                 case Enumerations.ButtonStyle.Link:
                     cssClass += "btn-link";
                     break;
+            }
+
+            if (IsBlock)
+            {
+                cssClass += " btn-block";
             }
 
             this.CssClass = cssClass;
