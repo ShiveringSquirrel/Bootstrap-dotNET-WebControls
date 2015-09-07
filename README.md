@@ -8,3 +8,7 @@ Some nuget (or manually installed) packages are nesecary to make these controls 
 * Install-Package bootstrap
 * Install-Package Bootstrap.Switch
 * Install-Package Bootstrap.v3.Datetimepicker.CSS
+
+## Not required but nice to have
+
+* Install-Package FontAwesome 
