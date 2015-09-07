@@ -9,7 +9,7 @@ namespace BootstrapControls.Controls
     [ToolboxData("<{0}:Alert runat=\"server\" Text=\"\" Title=\"Error\" ImageClass=\"glyphicon glyphicon-exclamation-sign\" AlertStyle=\"Error\" />")]
     [DefaultProperty("Text")]
     [Serializable]
-    public class Alert : Label
+    public class Alert : WebControl
     {
         [Category("Appearance")]
         [Browsable(true)]
@@ -73,6 +73,28 @@ namespace BootstrapControls.Controls
             set
             {
                 ViewState["Title"] = value;
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [DefaultValue("")]
+        [Description("The text/message to display in this alert")]
+        [Localizable(true)]
+        public string Text
+        {
+            get
+            {
+                if (ViewState["Text"] != null &&
+                    !string.IsNullOrEmpty(ViewState["Text"].ToString()))
+                {
+                    return ViewState["Text"].ToString();
+                }
+                return "";
+            }
+            set
+            {
+                ViewState["Text"] = value;
             }
         }
 
