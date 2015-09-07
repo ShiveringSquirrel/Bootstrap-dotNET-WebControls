@@ -20,67 +20,52 @@ namespace BootstrapControls.Controls
     {
         [Category("Appearance")]
         [Browsable(true)]
-        [DefaultValue("Text label")]
-        [Description("The label for this text. Ex: Name.")]
+        [DefaultValue("")]
+        [Description("The label for this text. Ex: Birthdate.")]
         [Localizable(true)]
         public string Label
         {
             get
             {
-                if (ViewState["Label"] != null &&
-                    !string.IsNullOrEmpty(ViewState["Label"].ToString()))
-                {
-                    return ViewState["Label"].ToString();
-                }
-                return "";
+                return ViewState.GetPropertyValue("Label", "");
             }
             set
             {
-                ViewState["Label"] = value;
+                ViewState.SetPropertyValue("Label", value);
             }
         }
 
         [Category("Appearance")]
         [Browsable(true)]
-        [Description("The help text to display. Ex: please fill in a name.")]
+        [Description("The help text to display. Ex: Please fill in a Birthdate.")]
         [Localizable(true)]
         [DefaultValue("")]
         public string HelpText
         {
             get
             {
-                if (ViewState["HelpText"] != null &&
-                    !string.IsNullOrEmpty(ViewState["HelpText"].ToString()))
-                {
-                    return ViewState["HelpText"].ToString();
-                }
-                return "";
+                return ViewState.GetPropertyValue("HelpText", "");
             }
             set
             {
-                ViewState["HelpText"] = value;
+                ViewState.SetPropertyValue("HelpText", value);
             }
         }
 
         [Category("Appearance")]
         [Browsable(true)]
-        [Description("The placeholder to display inside the text. Ex. The name")]
+        [Description("The placeholder to display inside the text. Ex. Your birthdate")]
         [Localizable(true)]
         [DefaultValue("")]
         public string Placeholder
         {
             get
             {
-                if (ViewState["Placeholder"] != null &&
-                    !string.IsNullOrEmpty(ViewState["Placeholder"].ToString()))
-                {
-                    return ViewState["Placeholder"].ToString();
-                }
-                return "";
+                return ViewState.GetPropertyValue("Placeholder", "");
             }
             set
             {
-                ViewState["Placeholder"] = value;
+                ViewState.SetPropertyValue("Placeholder", value);
             }
         }
 
@@ -88,20 +73,16 @@ namespace BootstrapControls.Controls
         [Browsable(true)]
         [DefaultValue("Normal")]
         [Description("What is the state of this control. Ex Disabled")]
-        [Localizable(true)]
+        [Localizable(false)]
         public Enumerations.States State
         {
             get
             {
-                if (ViewState["Type"] is Enumerations.States)
-                {
-                    return (Enumerations.States)ViewState["Type"];
-                }
-                return Enumerations.States.Normal;
+                return ViewState.GetPropertyValue("State", Enumerations.States.Normal);
             }
             set
             {
-                ViewState["Type"] = value;
+                ViewState.SetPropertyValue("State", value);
             }
         }
 
@@ -109,20 +90,16 @@ namespace BootstrapControls.Controls
         [Browsable(true)]
         [DefaultValue("Normal")]
         [Description("The style of the form-group element.")]
-        [Localizable(true)]
+        [Localizable(false)]
         public Enumerations.FormGroupStyle GroupStyle
         {
             get
             {
-                if (ViewState["GroupStyle"] is Enumerations.FormGroupStyle)
-                {
-                    return (Enumerations.FormGroupStyle)ViewState["GroupStyle"];
-                }
-                return Enumerations.FormGroupStyle.Normal;
+                return ViewState.GetPropertyValue("GroupStyle", Enumerations.FormGroupStyle.Normal);
             }
             set
             {
-                ViewState["GroupStyle"] = value;
+                ViewState.SetPropertyValue("GroupStyle", value);
             }
         }
 
@@ -153,17 +130,14 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (!string.IsNullOrEmpty(this.Text))
-                {
-                    return DateTime.Parse(this.Text);
-                }
-                return null;
+                return ViewState.GetPropertyValue("DateTimeValue", new DateTime?());
             }
             set
             {
                 if (value.HasValue)
                 {
                     this.Text = value.Value.ToString(this.DateTimeMask.Replace("D", "d").Replace("Y", "y"));
+                    ViewState.SetPropertyValue("DateTimeValue", value);
                 }
             }
         }
@@ -177,16 +151,11 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["DateTimeMask"] != null &&
-                    !string.IsNullOrEmpty(ViewState["DateTimeMask"].ToString()))
-                {
-                    return ViewState["DateTimeMask"].ToString();
-                }
-                return "DD/MM/YYYY HH:mm:ss";
+                return ViewState.GetPropertyValue("DateTimeMask", "DD/MM/YYYY HH:mm:ss");
             }
             set
             {
-                ViewState["DateTimeMask"] = value;
+                ViewState.SetPropertyValue("DateTimeMask", value);
             }
         }
 
@@ -199,62 +168,13 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["Language"] != null &&
-                    !string.IsNullOrEmpty(ViewState["Language"].ToString()))
-                {
-                    return ViewState["Language"].ToString();
-                }
-                return "nl-BE";
+                return ViewState.GetPropertyValue("Language", "nl-BE");
             }
             set
             {
-                ViewState["Language"] = value;
+                ViewState.SetPropertyValue("Language", value);
             }
         }
-
-        //[Category("Date and Time")]
-        //[Browsable(true)]
-        //[DefaultValue("True")]
-        //[Description("Do we offer a time selection?")]
-        //[Localizable(false)]
-        //public bool PickTime
-        //{
-        //    get
-        //    {
-        //        if (ViewState["PickTime"] != null &&
-        //            ViewState["PickTime"] is bool)
-        //        {
-        //            return (bool)ViewState["PickTime"];
-        //        }
-        //        return true;
-        //    }
-        //    set
-        //    {
-        //        ViewState["PickTime"] = value;
-        //    }
-        //}
-
-        //[Category("Date and Time")]
-        //[Browsable(true)]
-        //[DefaultValue("True")]
-        //[Description("Do we offer a date selection?")]
-        //[Localizable(false)]
-        //public bool PickDate
-        //{
-        //    get
-        //    {
-        //        if (ViewState["PickDate"] != null &&
-        //            ViewState["PickDate"] is bool)
-        //        {
-        //            return (bool)ViewState["PickDate"];
-        //        }
-        //        return true;
-        //    }
-        //    set
-        //    {
-        //        ViewState["PickDate"] = value;
-        //    }
-        //}
 
         public DateTimePickerInput()
         {

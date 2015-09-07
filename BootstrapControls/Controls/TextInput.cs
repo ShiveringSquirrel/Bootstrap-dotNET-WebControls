@@ -18,67 +18,52 @@ namespace BootstrapControls.Controls
     {
         [Category("Appearance")]
         [Browsable(true)]
-        [DefaultValue("Text label")]
+        [DefaultValue("")]
         [Description("The label for this text. Ex: Name.")]
         [Localizable(true)]
         public string Label
         {
             get
             {
-                if (ViewState["Label"] != null &&
-                    !string.IsNullOrEmpty(ViewState["Label"].ToString()))
-                {
-                    return ViewState["Label"].ToString();
-                }
-                return "";
+                return ViewState.GetPropertyValue("Label", "");
             }
             set
             {
-                ViewState["Label"] = value;
+                ViewState.SetPropertyValue("Label", value);
             }
         }
 
         [Category("Appearance")]
         [Browsable(true)]
-        [Description("The help text to display. Ex: please fill in a name.")]
+        [Description("The help text to display. Ex: Please fill in a name.")]
         [Localizable(true)]
         [DefaultValue("")]
         public string HelpText
         {
             get
             {
-                if (ViewState["HelpText"] != null &&
-                    !string.IsNullOrEmpty(ViewState["HelpText"].ToString()))
-                {
-                    return ViewState["HelpText"].ToString();
-                }
-                return "";
+                return ViewState.GetPropertyValue("HelpText", "");
             }
             set
             {
-                ViewState["HelpText"] = value;
+                ViewState.SetPropertyValue("HelpText", value);
             }
         }
 
         [Category("Appearance")]
         [Browsable(true)]
-        [Description("The placeholder to display inside the text. Ex. The name")]
+        [Description("The placeholder to display inside the text. Ex. Your name")]
         [Localizable(true)]
         [DefaultValue("")]
         public string Placeholder
         {
             get
             {
-                if (ViewState["Placeholder"] != null &&
-                    !string.IsNullOrEmpty(ViewState["Placeholder"].ToString()))
-                {
-                    return ViewState["Placeholder"].ToString();
-                }
-                return "";
+                return ViewState.GetPropertyValue("Placeholder", "");
             }
             set
             {
-                ViewState["Placeholder"] = value;
+                ViewState.SetPropertyValue("Placeholder", value);
             }
         }
 
@@ -91,15 +76,11 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["Type"] is Enumerations.States)
-                {
-                    return (Enumerations.States)ViewState["Type"];
-                }
-                return Enumerations.States.Normal;
+                return ViewState.GetPropertyValue("State", Enumerations.States.Normal);
             }
             set
             {
-                ViewState["Type"] = value;
+                ViewState.SetPropertyValue("State", value);
             }
         }
 
@@ -112,15 +93,11 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["GroupStyle"] is Enumerations.FormGroupStyle)
-                {
-                    return (Enumerations.FormGroupStyle)ViewState["GroupStyle"];
-                }
-                return Enumerations.FormGroupStyle.Normal;
+                return ViewState.GetPropertyValue("GroupStyle", Enumerations.FormGroupStyle.Normal);
             }
             set
             {
-                ViewState["GroupStyle"] = value;
+                ViewState.SetPropertyValue("GroupStyle", value);
             }
         }
 
@@ -133,16 +110,11 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["PrefixText"] != null &&
-                    !string.IsNullOrEmpty(ViewState["PrefixText"].ToString()))
-                {
-                    return ViewState["PrefixText"].ToString();
-                }
-                return "";
+                return ViewState.GetPropertyValue("PrefixText", "");
             }
             set
             {
-                ViewState["PrefixText"] = value;
+                ViewState.SetPropertyValue("PrefixText", value);
             }
         }
 
@@ -155,16 +127,11 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["PrefixImageClass"] != null &&
-                    !string.IsNullOrEmpty(ViewState["PrefixImageClass"].ToString()))
-                {
-                    return ViewState["PrefixImageClass"].ToString();
-                }
-                return "";
+                return ViewState.GetPropertyValue("PrefixImageClass", "");
             }
             set
             {
-                ViewState["PrefixImageClass"] = value;
+                ViewState.SetPropertyValue("PrefixImageClass", value);
             }
         }
 
@@ -177,16 +144,11 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["PostfixText"] != null &&
-                    !string.IsNullOrEmpty(ViewState["PostfixText"].ToString()))
-                {
-                    return ViewState["PostfixText"].ToString();
-                }
-                return "";
+                return ViewState.GetPropertyValue("PostfixText", "");
             }
             set
             {
-                ViewState["PostfixText"] = value;
+                ViewState.SetPropertyValue("PostfixText", value);
             }
         }
 
@@ -199,16 +161,11 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["PostfixImageClass"] != null &&
-                    !string.IsNullOrEmpty(ViewState["PostfixImageClass"].ToString()))
-                {
-                    return ViewState["PostfixImageClass"].ToString();
-                }
-                return "";
+                return ViewState.GetPropertyValue("PostfixImageClass", "");
             }
             set
             {
-                ViewState["PostfixImageClass"] = value;
+                ViewState.SetPropertyValue("PostfixImageClass", value);
             }
         }
 

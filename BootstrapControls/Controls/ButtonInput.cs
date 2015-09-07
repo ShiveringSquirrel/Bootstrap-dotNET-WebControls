@@ -23,15 +23,11 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["ButtonStyle"] is Enumerations.ButtonStyle)
-                {
-                    return (Enumerations.ButtonStyle)ViewState["ButtonStyle"];
-                }
-                return Enumerations.ButtonStyle.Default;
+                return ViewState.GetPropertyValue("ButtonStyle", Enumerations.ButtonStyle.Default);
             }
             set
             {
-                ViewState["ButtonStyle"] = value;
+                ViewState.SetPropertyValue("ButtonStyle", value);
             }
         }
 
@@ -44,16 +40,11 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["IsBlock"] is bool)
-                {
-                    return (bool)ViewState["IsBlock"];
-                }
-                return false;
+                return ViewState.GetPropertyValue("IsBlock", false);
             }
             set
             {
-                ViewState["IsBlock"] = value;
-
+                ViewState.SetPropertyValue("IsBlock", value);
             }
         }
 

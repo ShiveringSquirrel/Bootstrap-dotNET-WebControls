@@ -20,15 +20,11 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["AlertStyle"] is Enumerations.AlertStyle)
-                {
-                    return (Enumerations.AlertStyle)ViewState["AlertStyle"];
-                }
-                return Enumerations.AlertStyle.Info;
+                return ViewState.GetPropertyValue("AlertStyle", Enumerations.AlertStyle.Info);
             }
             set
             {
-                ViewState["AlertStyle"] = value;
+                ViewState.SetPropertyValue("AlertStyle", value);
             }
         }
 
@@ -41,16 +37,11 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["ImageClass"] != null &&
-                    !string.IsNullOrEmpty(ViewState["ImageClass"].ToString()))
-                {
-                    return ViewState["ImageClass"].ToString();
-                }
-                return "";
+                return ViewState.GetPropertyValue("ImageClass", "");
             }
             set
             {
-                ViewState["ImageClass"] = value;
+                ViewState.SetPropertyValue("ImageClass", value);
             }
         }
 
@@ -63,16 +54,11 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["Title"] != null &&
-                    !string.IsNullOrEmpty(ViewState["Title"].ToString()))
-                {
-                    return ViewState["Title"].ToString();
-                }
-                return "";
+                return ViewState.GetPropertyValue("Title", "");
             }
             set
             {
-                ViewState["Title"] = value;
+                ViewState.SetPropertyValue("Title", value);
             }
         }
 
@@ -85,16 +71,11 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["Text"] != null &&
-                    !string.IsNullOrEmpty(ViewState["Text"].ToString()))
-                {
-                    return ViewState["Text"].ToString();
-                }
-                return "";
+                return ViewState.GetPropertyValue("Text", "");
             }
             set
             {
-                ViewState["Text"] = value;
+                ViewState.SetPropertyValue("Text", value);
             }
         }
 

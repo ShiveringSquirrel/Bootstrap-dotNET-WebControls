@@ -34,16 +34,11 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                if (ViewState["Title"] != null &&
-                    !string.IsNullOrEmpty(ViewState["Title"].ToString()))
-                {
-                    return ViewState["Title"].ToString();
-                }
-                return "";
+                return ViewState.GetPropertyValue("Title", "");
             }
             set
             {
-                ViewState["Title"] = value;
+                ViewState.SetPropertyValue("Title", value);
             }
         }
 
