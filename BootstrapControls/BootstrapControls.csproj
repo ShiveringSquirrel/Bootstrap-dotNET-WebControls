@@ -50,6 +50,7 @@
     <Compile Include="Controls\TextInput.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="Extentions.cs" />
+    <Compile Include="GenericProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
