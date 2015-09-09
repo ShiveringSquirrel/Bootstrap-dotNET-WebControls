@@ -94,22 +94,13 @@ namespace CentUA {
         protected global::BootstrapControls.Controls.DateTimePickerInput DateTimePickerInput1;
         
         /// <summary>
-        /// Button1 control.
+        /// SelectInput1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::BootstrapControls.Controls.ButtonInput Button1;
-        
-        /// <summary>
-        /// ButtonInput1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::BootstrapControls.Controls.ButtonInput ButtonInput1;
+        protected global::BootstrapControls.Controls.SelectInput SelectInput1;
         
         /// <summary>
         /// alert1 control.
@@ -128,5 +119,23 @@ namespace CentUA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::BootstrapControls.Controls.Alert alert2;
+        
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::BootstrapControls.Controls.ButtonInput Button1;
+        
+        /// <summary>
+        /// ButtonInput1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::BootstrapControls.Controls.ButtonInput ButtonInput1;
     }
 }

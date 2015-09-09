@@ -47,6 +47,7 @@
     <Compile Include="Controls\BootstrapPanel.cs" />
     <Compile Include="Controls\ButtonInput.cs" />
     <Compile Include="Controls\DateTimePickerInput.cs" />
+    <Compile Include="Controls\SelectInput.cs" />
     <Compile Include="Controls\TextInput.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="Extentions.cs" />
