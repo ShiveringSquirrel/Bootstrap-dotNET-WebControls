@@ -18,6 +18,8 @@
     <link href="Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <%--<link href="Content/bootstrap-switch/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" />--%>
 
+    <link href="Content/bootstrap-chosen.css" rel="stylesheet" />
+
     <script src="Scripts/jquery-2.1.4.min.js"></script>
 
     <script src="Scripts/bootstrap.min.js"></script>
@@ -26,6 +28,9 @@
     <%--    <script src="Scripts/moment.min.js"></script>--%>
     <script src="Scripts/moment-with-locales.min.js"></script>
     <script src="Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="Scripts/chosen.jquery.min.js"></script>
+
+
 
     <title>Test page - custom controls</title>
 </head>
@@ -82,9 +87,10 @@
                         </cc1:DateTimePickerInput>
 
                         <cc1:SelectInput ID="SelectInput1" runat="server" Label="Country"
-                            HelpText="Select your country in the selection box">
+                            HelpText="Select your country in the selection box"
+                            Placeholder="Select your country"
+                            AddChznClass="True">
 
-                            <asp:ListItem Text="Select your coutry" Value="" Selected="True" disabled></asp:ListItem>
                             <asp:ListItem Text="Belgium" Value="BE"></asp:ListItem>
                             <asp:ListItem Text="The Netherlands" Value="NL"></asp:ListItem>
                             <asp:ListItem Text="France" Value="FR"></asp:ListItem>
@@ -93,6 +99,14 @@
                             <asp:ListItem Text="Germany" Value="GR"></asp:ListItem>
 
                         </cc1:SelectInput>
+
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
+                            ControlToValidate="SelectInput1"
+                            Text="*"
+                            EnableClientScript="False"
+                            Display="None"
+                            runat="server"
+                            ErrorMessage="Country is required"></asp:RequiredFieldValidator>
 
                     </div>
 
@@ -111,7 +125,6 @@
 
             </div>
         </div>
-
     </form>
 </body>
 </html>

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -49,6 +51,48 @@ namespace BootstrapControls.Controls
             }
         }
 
+        [Category("Appearance")]
+        [Browsable(true)]
+        [DefaultValue("")]
+        [Description("The placeholder to use for this select. Ex: Select your country.")]
+        [Localizable(true)]
+        public string Placeholder
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("Placeholder", "");
+            }
+            set
+            {
+                ViewState.SetPropertyValue("Placeholder", value);
+                ListItem listItem = new ListItem(value, "");
+                listItem.Attributes.Add("disabled", "");
+                this.Items.Insert(0, listItem);
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [Description("Add chzn-select class for the chosen framework")]
+        [Localizable(true)]
+        [DefaultValue("False")]
+        public bool AddChznClass
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("AddChznClass", false);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("AddChznClass", value);
+            }
+        }
+
+        public SelectInput()
+        {
+            SelectedValue = "";
+        }
+
         protected override void Render(HtmlTextWriter writer)
         {
             //This will hold all the HTML we want to write as output.
@@ -74,11 +118,23 @@ namespace BootstrapControls.Controls
 
             //Render the base control using a new html writer, which in turn uses a 
             //text writer so we can capture the html and store it in our string builder
-
             TextWriter txtWriter = new StringWriter();
             HtmlTextWriter htmlWriter = new HtmlTextWriter(txtWriter);
 
-            htmlWriter.AddAttribute(HtmlTextWriterAttribute.Class, "form-control");
+            string cssSelectClass = "form-control";
+            if (AddChznClass)
+            {
+                cssSelectClass += " chzn-select";
+            }
+            htmlWriter.AddAttribute(HtmlTextWriterAttribute.Class, cssSelectClass);
+
+            //If we have a placeholder and its a "chosen" dropdown, remove the text from the first item
+            //Item is added when setting the placeholder property.
+            if (!string.IsNullOrEmpty(this.Placeholder) && AddChznClass)
+            {
+                htmlWriter.AddAttribute("data-placeholder", this.Placeholder);
+                this.Items[0].Text = "";
+            }
 
             base.Render(htmlWriter);
             sb.Append(txtWriter);
@@ -94,6 +150,10 @@ namespace BootstrapControls.Controls
 
             sb.Append("</div>");
             sb.Append(Environment.NewLine);
+
+            sb.Append("<script type=\"text/javascript\">");
+            sb.Append("$(\"#" + this.ClientID + "\").chosen();");
+            sb.Append("</script>");
 
             Literal litEnd = new Literal();
             litEnd.Text = sb.ToString();

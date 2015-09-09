@@ -185,7 +185,9 @@ namespace BootstrapControls.Controls
 
             ClientScriptManager manager = (HttpContext.Current.Handler as Page).ClientScript;
             if (!manager.IsClientScriptBlockRegistered(manager.GetType(), resource))
+            {
                 manager.RegisterClientScriptBlock(manager.GetType(), resource, a, true);
+            }
         }
 
         protected override void Render(System.Web.UI.HtmlTextWriter writer)

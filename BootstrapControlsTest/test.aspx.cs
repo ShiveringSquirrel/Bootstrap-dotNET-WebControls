@@ -24,7 +24,8 @@ namespace CentUA
         {
             if (this.Page.IsValid)
             {
-                Button1.Text = TextInput1.Text + " " + TextInput2.Text + " " +
+                Button1.Text = TextInput1.Text + " " + TextInput2.Text + " Country:" +
+                               SelectInput1.SelectedValue + " " +
                                TextInput1.Label + " " + TextInput2.Label + " " + DateTimePickerInput1.DateTimeValue;
             }
         }
