@@ -112,6 +112,24 @@ namespace CentUA {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
+        /// SelectListInput1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::BootstrapControls.Controls.SelectListInput SelectListInput1;
+        
+        /// <summary>
+        /// RequiredFieldValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
+        
+        /// <summary>
         /// alert1 control.
         /// </summary>
         /// <remarks>
@@ -146,5 +164,14 @@ namespace CentUA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::BootstrapControls.Controls.ButtonInput ButtonInput1;
+        
+        /// <summary>
+        /// lblAnimalsSelected control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAnimalsSelected;
     }
 }

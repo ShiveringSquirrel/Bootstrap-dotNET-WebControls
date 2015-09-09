@@ -27,6 +27,13 @@ namespace CentUA
                 Button1.Text = TextInput1.Text + " " + TextInput2.Text + " Country:" +
                                SelectInput1.SelectedValue + " " +
                                TextInput1.Label + " " + TextInput2.Label + " " + DateTimePickerInput1.DateTimeValue;
+
+                this.lblAnimalsSelected.Text = "Your selected animal(s)<br>";
+                foreach (string animal in this.SelectListInput1.GetSelected(false))
+                {
+                    this.lblAnimalsSelected.Text += animal + "<br>";
+                }
+
             }
         }
     }

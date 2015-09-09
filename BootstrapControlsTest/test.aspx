@@ -108,6 +108,26 @@
                             runat="server"
                             ErrorMessage="Country is required"></asp:RequiredFieldValidator>
 
+                        <cc1:SelectListInput runat="server"
+                            ID="SelectListInput1" SelectionMode="Multiple" Placeholder="Select your animal(s)"
+                            Label="Animals" AddChznClass="True"
+                            HelpText="Select your favorite animal(s). Hold shift to select multiple values.">
+                            <asp:ListItem Text="Monkey" Value="m"></asp:ListItem>
+                            <asp:ListItem Text="Koala" Value="k"></asp:ListItem>
+                            <asp:ListItem Text="Elephant" Value="e"></asp:ListItem>
+                            <asp:ListItem Text="Girafe" Value="g"></asp:ListItem>
+                            <asp:ListItem Text="Hippopotamus" Value="h"></asp:ListItem>
+                            <asp:ListItem Text="Lion" Value="l"></asp:ListItem>
+                        </cc1:SelectListInput>
+
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
+                            ControlToValidate="SelectListInput1"
+                            Text="*"
+                            EnableClientScript="False"
+                            Display="None"
+                            runat="server"
+                            ErrorMessage="Animal is required"></asp:RequiredFieldValidator>
+
                     </div>
 
                 </div>
@@ -120,6 +140,10 @@
 
                     <cc1:ButtonInput ID="Button1" runat="server" Text="Cancel" />
                     <cc1:ButtonInput ID="ButtonInput1" runat="server" Text="Submit" ButtonStyle="Primary" OnClick="Button1_Click" />
+
+                    <br />
+                    <br />
+                    <asp:Label ID="lblAnimalsSelected" runat="server" Text="Your selected animals..."></asp:Label>
 
                 </div>
 
