@@ -173,5 +173,32 @@ namespace CentUA {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAnimalsSelected;
+        
+        /// <summary>
+        /// bPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::BootstrapControls.Controls.BootstrapPanel bPanel;
+        
+        /// <summary>
+        /// DateTimePickerInputMin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::BootstrapControls.Controls.DateTimePickerInput DateTimePickerInputMin;
+        
+        /// <summary>
+        /// DateTimePickerInputMax control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::BootstrapControls.Controls.DateTimePickerInput DateTimePickerInputMax;
     }
 }

@@ -103,7 +103,7 @@ namespace BootstrapControls.Controls
             }
         }
 
-        private Guid InternalId
+        public Guid InternalId
         {
             get
             {
@@ -115,7 +115,7 @@ namespace BootstrapControls.Controls
                 ViewState["InternalId"] = Guid.NewGuid();
                 return this.InternalId;
             }
-            set
+            internal set
             {
                 ViewState["InternalId"] = value;
             }
@@ -173,6 +173,25 @@ namespace BootstrapControls.Controls
             set
             {
                 ViewState.SetPropertyValue("Language", value);
+            }
+        }
+
+        [Category("Date and Time")]
+        [Browsable(true)]
+        [DefaultValue(null)]
+        [Description("The linked DateTimePicker. This reference will be used as the maximum date while the current DateTimePicker will be used as the minimum date.")]
+        [Localizable(false)]
+        [ThemeableAttribute(false)]
+        //[TypeConverterAttribute(typeof(ValidatedControlConverter))]
+        public string DateTimePickerUsedAsMax
+        {
+            get
+            {                
+                return ViewState.GetPropertyValue<string>("DateTimePickerUsedAsMax", null);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("DateTimePickerUsedAsMax", value);
             }
         }
 
@@ -275,8 +294,22 @@ namespace BootstrapControls.Controls
             sb.Append("</div>");
             sb.Append(Environment.NewLine);
 
+            string linkedDtp = "null";
+            if(this.DateTimePickerUsedAsMax != null && !string.IsNullOrEmpty(this.DateTimePickerUsedAsMax))
+            {
+                var dtpControl = this.Page.FindControlRecursive(this.DateTimePickerUsedAsMax);
+                if (dtpControl is DateTimePickerInput)
+                {
+                    linkedDtp = "$(\"#" + (dtpControl as DateTimePickerInput).InternalId + "\")";
+                }
+                else
+                {
+                    throw new Exception("Error rendering DateTimePicker control: " + this.DateTimePickerUsedAsMax + " could not be found or is not of the correct Type.");
+                }
+            }
+
             sb.Append("<script type=\"text/javascript\">");
-            sb.Append("CreateDateTimePicker($(\"#" + this.InternalId + "\"),\"" + this.Language + "\", \"" + this.DateTimeMask + "\");");
+            sb.Append("$(window).load(function() { CreateDateTimePicker($(\"#" + this.InternalId + "\"),\"" + this.Language + "\", \"" + this.DateTimeMask + "\", " + linkedDtp + "); })");
             sb.Append("</script>");
 
             Literal litEnd = new Literal();

@@ -8,6 +8,24 @@ namespace BootstrapControls
     /// </summary>
     public static class Extentions
     {
+        internal static Control FindControlRecursive(this Control root, string id)
+        {
+            if (root.ID == id)
+            {
+                return root;
+            }
+            foreach (Control c in root.Controls)
+            {
+                Control t = c.FindControlRecursive(id);
+                if (t != null)
+                {
+                    return t;
+                }
+            }
+            return null;
+        }
+
+
         internal static bool IsValid(this WebControl control)
         {
             bool ret = true;

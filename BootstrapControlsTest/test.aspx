@@ -144,6 +144,24 @@
                     <br />
                     <br />
                     <asp:Label ID="lblAnimalsSelected" runat="server" Text="Your selected animals..."></asp:Label>
+                    <br />
+
+                    <cc1:BootstrapPanel ID="bPanel" Title="Range test" runat="server">
+
+                        <cc1:DateTimePickerInput ID="DateTimePickerInputMin"
+                            runat="server"
+                            Language="en-GB"
+                            DateTimePickerUsedAsMax="DateTimePickerInputMax"
+                            Label="From date">
+                        </cc1:DateTimePickerInput>
+
+                        <cc1:DateTimePickerInput ID="DateTimePickerInputMax"
+                            runat="server"
+                            Language="en-GB"
+                            Label="To date">
+                        </cc1:DateTimePickerInput>
+
+                    </cc1:BootstrapPanel>
 
                 </div>
 
