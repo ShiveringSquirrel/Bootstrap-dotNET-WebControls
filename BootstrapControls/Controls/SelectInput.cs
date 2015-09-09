@@ -20,7 +20,7 @@ namespace BootstrapControls.Controls
         [Category("Appearance")]
         [Browsable(true)]
         [DefaultValue("")]
-        [Description("The label for this text. Ex: Country.")]
+        [Description("The label for this select. Ex: Country.")]
         [Localizable(true)]
         public string Label
         {
@@ -74,7 +74,7 @@ namespace BootstrapControls.Controls
         [Category("Appearance")]
         [Browsable(true)]
         [Description("Add chzn-select class for the chosen framework")]
-        [Localizable(true)]
+        [Localizable(false)]
         [DefaultValue("False")]
         public bool AddChznClass
         {
@@ -151,9 +151,12 @@ namespace BootstrapControls.Controls
             sb.Append("</div>");
             sb.Append(Environment.NewLine);
 
-            sb.Append("<script type=\"text/javascript\">");
-            sb.Append("$(\"#" + this.ClientID + "\").chosen();");
-            sb.Append("</script>");
+            if (AddChznClass)
+            {
+                sb.Append("<script type=\"text/javascript\">");
+                sb.Append("$(\"#" + this.ClientID + "\").chosen();");
+                sb.Append("</script>");
+            }
 
             Literal litEnd = new Literal();
             litEnd.Text = sb.ToString();
