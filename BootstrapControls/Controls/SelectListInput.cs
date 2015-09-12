@@ -112,7 +112,7 @@ namespace BootstrapControls.Controls
 
         public SelectListInput()
         {
-            SelectedValue = "";
+            //SelectedValue = "";
         }
 
         protected override void Render(HtmlTextWriter writer)
