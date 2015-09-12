@@ -12,7 +12,7 @@ namespace BootstrapControls.Controls
     [DefaultProperty("Text")]
     [Serializable]
     [ParseChildren(true, "InnerChild")]
-    public class BootstrapPanel : WebControl, INamingContainer
+    public class BootstrapPanel : Panel, INamingContainer
     {
         /// <summary>
         /// This will be used to list all the inner controls of this panel.
