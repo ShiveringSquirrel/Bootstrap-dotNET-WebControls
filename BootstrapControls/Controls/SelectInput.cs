@@ -101,6 +101,11 @@ namespace BootstrapControls.Controls
             //Holds the group class(es)
             string cssGroupClass = "form-group";
 
+            if (!this.IsValid()) //Call the extention method in base to see if this control is valid
+            {
+                cssGroupClass += " has-error";
+            }
+
             sb.Append("<div class=\"");
             sb.Append(cssGroupClass);
             sb.Append("\">");
