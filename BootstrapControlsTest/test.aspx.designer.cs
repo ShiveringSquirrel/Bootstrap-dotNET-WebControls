@@ -202,6 +202,24 @@ namespace CentUA {
         protected global::BootstrapControls.Controls.DateTimePickerInput DateTimePickerInputMax;
         
         /// <summary>
+        /// switch1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::BootstrapControls.Controls.Switch switch1;
+        
+        /// <summary>
+        /// switch2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::BootstrapControls.Controls.Switch switch2;
+        
+        /// <summary>
         /// ButtonInput2 control.
         /// </summary>
         /// <remarks>

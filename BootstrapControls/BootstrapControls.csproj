@@ -53,6 +53,7 @@
     <Compile Include="Controls\Pagination.cs" />
     <Compile Include="Controls\SelectInput.cs" />
     <Compile Include="Controls\SelectListInput.cs" />
+    <Compile Include="Controls\Switch.cs" />
     <Compile Include="Controls\TextInput.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="Extentions.cs" />

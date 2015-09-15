@@ -16,14 +16,14 @@
     <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="Content/font-awesome.min.css" rel="stylesheet" />
     <link href="Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-    <%--<link href="Content/bootstrap-switch/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" />--%>
+    <link href="Content/bootstrap-switch/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" />
 
     <link href="Content/bootstrap-chosen.css" rel="stylesheet" />
 
     <script src="Scripts/jquery-2.1.4.min.js"></script>
 
     <script src="Scripts/bootstrap.min.js"></script>
-    <%--    <script src="Scripts/bootstrap-switch.min.js"></script>--%>
+    <script src="Scripts/bootstrap-switch.min.js"></script>
 
     <%--    <script src="Scripts/moment.min.js"></script>--%>
     <script src="Scripts/moment-with-locales.min.js"></script>
@@ -162,6 +162,9 @@
                         </cc1:DateTimePickerInput>
 
                     </cc1:BootstrapPanel>
+
+                    <cc1:Switch runat="server" ID="switch1" OnText="Yes" OffText="No" Label="Some checkbox" />
+                    <cc1:Switch runat="server" ID="switch2" Disabled="True" Label="Some disabled checkbox" />
 
                 </div>
 

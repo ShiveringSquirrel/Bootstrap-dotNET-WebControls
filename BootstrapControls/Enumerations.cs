@@ -37,5 +37,13 @@ namespace BootstrapControls
         {
             Default, Primary, Info, Success, Warning, Danger, Link
         }
+
+        /// <summary>
+        /// Describes the size of a switch bootstrap element
+        /// </summary>
+        public enum SwitchSize
+        {
+            Mini, Small, Normal, Large
+        }
     }
 }
