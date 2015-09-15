@@ -165,6 +165,87 @@
 
                 </div>
 
+                <div class="col-md-3">
+
+                    <br />
+
+                    <cc1:ButtonInput ID="ButtonInput2"
+                        runat="server"
+                        Text="Show modal window"
+                        ModalWindowIdToOpen="Modal1"
+                        ButtonStyle="Success" />
+
+                    <cc1:Modal runat="server"
+                        CausesValidation="True"
+                        ValidationGroup="MODALVALIDATION"
+                        CanClose="True"
+                        ID="Modal1" Title="This is a modal window"
+                        OnSubmitClicked="Modal1_SubmitClicked">
+
+                        <asp:ValidationSummary
+                            CssClass="alert alert-danger"
+                            HeaderText="Please correct the following errors"
+                            ID="ValidationSummary2" ValidationGroup="MODALVALIDATION" runat="server" />
+
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type 
+                        specimen book. It has survived not only five centuries, but also the leap into 
+                        electronic typesetting, remaining essentially unchanged. It was popularised in 
+                        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                        and more recently with desktop publishing software like Aldus PageMaker including 
+                        versions of Lorem Ipsum.
+                        
+                        <cc1:TextInput ID="modalTxtName" runat="server" ValidationGroup="MODALVALIDATION" Label="Name" Placeholder="Please enter your name..." State="Normal" Text="">
+                        </cc1:TextInput>
+
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
+                            ControlToValidate="modalTxtName"
+                            Text="*"
+                            EnableClientScript="False"
+                            Display="None"
+                            ValidationGroup="MODALVALIDATION"
+                            ErrorMessage="Name is reguired (modal)"></asp:RequiredFieldValidator>
+
+                    </cc1:Modal>
+
+
+                    <cc1:ButtonInput ID="ButtonInput3"
+                        runat="server"
+                        Text="Show modal window (2)"
+                        ModalWindowIdToOpen="Modal2"
+                        ButtonStyle="Danger" />
+
+                    <cc1:Modal runat="server"
+                        CausesValidation="True"
+                        ValidationGroup="MODALVALIDATION_2"
+                        CanClose="True"
+                        UseFade="False"
+                        ID="Modal2" Title="This is a modal window (2)" OnSubmitClicked="Modal2_SubmitClicked">
+
+                        <asp:ValidationSummary
+                            CssClass="alert alert-danger"
+                            HeaderText="Please correct the following errors"
+                            ID="ValidationSummary3" ValidationGroup="MODALVALIDATION_2" runat="server" />
+
+                        This is the second modal window, this modal window uses the no fading...
+                        
+                        <cc1:TextInput ID="modalTxtName2" runat="server" ValidationGroup="MODALVALIDATION_2" Label="Name" Placeholder="Please enter your name..." State="Normal" Text="">
+                        </cc1:TextInput>
+
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
+                            ControlToValidate="modalTxtName2"
+                            Text="*"
+                            EnableClientScript="False"
+                            Display="None"
+                            ValidationGroup="MODALVALIDATION_2"
+                            ErrorMessage="Name is reguired (modal)"></asp:RequiredFieldValidator>
+
+                    </cc1:Modal>
+
+
+                </div>
+
             </div>
         </div>
     </form>

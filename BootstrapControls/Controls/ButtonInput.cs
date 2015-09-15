@@ -48,6 +48,23 @@ namespace BootstrapControls.Controls
             }
         }
 
+        [Category("Appearance")]
+        [Browsable(true)]
+        [DefaultValue("")]
+        [Description("The name of the modal control you wish to link to this button")]
+        [Localizable(false)]
+        public string ModalWindowIdToOpen
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("Modal", "");
+            }
+            set
+            {
+                ViewState.SetPropertyValue("Modal", value);
+            }
+        }
+
         protected override void Render(HtmlTextWriter writer)
         {
             string cssClass = "btn ";
@@ -80,6 +97,27 @@ namespace BootstrapControls.Controls
             if (IsBlock)
             {
                 cssClass += " btn-block";
+            }
+
+            string modalLink = "";
+            if (this.ModalWindowIdToOpen != null && !string.IsNullOrEmpty(this.ModalWindowIdToOpen))
+            {
+                var mControl = this.Page.FindControlRecursive(this.ModalWindowIdToOpen);
+                if (mControl is Modal)
+                {
+                    modalLink = "#" + mControl.ClientID;
+                }
+                else
+                {
+                    throw new Exception("Error rendering ButtonInput control: " + this.ModalWindowIdToOpen + " could not be found or is not of the correct Type.");
+                }
+            }
+
+            if (!string.IsNullOrEmpty(modalLink))
+            {
+                this.Attributes.Add("data-toggle", "modal");
+                this.Attributes.Add("data-target", modalLink);
+                this.OnClientClick = "return false;";
             }
 
             this.CssClass = cssClass;

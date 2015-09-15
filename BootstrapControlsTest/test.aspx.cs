@@ -33,8 +33,25 @@ namespace CentUA
                 {
                     this.lblAnimalsSelected.Text += animal + "<br>";
                 }
-
             }
         }
+
+        protected void Modal1_SubmitClicked()
+        {
+            if (Page.IsValid)
+            {
+                this.Button1.Text = "Hi " + this.modalTxtName.Text + "!!!";
+            }
+        }
+
+        protected void Modal2_SubmitClicked()
+        {
+            if (Page.IsValid)
+            {
+                this.Button1.Text = "Hi " + this.modalTxtName2.Text + "!!!";
+            }
+        }
+
+
     }
 }
