@@ -130,14 +130,20 @@ namespace BootstrapControls.Controls
         {
             get
             {
-                return ViewState.GetPropertyValue("DateTimeValue", new DateTime?());
+                DateTime dateTimeTry = new DateTime();
+                if (DateTime.TryParse(this.Text, out dateTimeTry))
+                {
+                    return dateTimeTry;
+                }
+                return null;
+                //return ViewState.GetPropertyValue("DateTimeValue", new DateTime?());
             }
             set
             {
                 if (value.HasValue)
                 {
                     this.Text = value.Value.ToString(this.DateTimeMask.Replace("D", "d").Replace("Y", "y"));
-                    ViewState.SetPropertyValue("DateTimeValue", value);
+                    //ViewState.SetPropertyValue("DateTimeValue", value);
                 }
             }
         }
@@ -178,7 +184,7 @@ namespace BootstrapControls.Controls
 
         [Category("Date and Time")]
         [Browsable(true)]
-        [DefaultValue(null)]
+        [DefaultValue("")]
         [Description("The linked DateTimePicker. This reference will be used as the maximum date while the current DateTimePicker will be used as the minimum date.")]
         [Localizable(false)]
         [ThemeableAttribute(false)]
@@ -186,8 +192,8 @@ namespace BootstrapControls.Controls
         public string DateTimePickerUsedAsMax
         {
             get
-            {                
-                return ViewState.GetPropertyValue<string>("DateTimePickerUsedAsMax", null);
+            {
+                return ViewState.GetPropertyValue("DateTimePickerUsedAsMax", "");
             }
             set
             {
@@ -199,6 +205,7 @@ namespace BootstrapControls.Controls
         {
             string resource = "BootstrapControls.Resources.DateTimePickerInput.js";
             var _assembly = Assembly.GetExecutingAssembly();
+
             var _textStreamReader = new StreamReader(_assembly.GetManifestResourceStream(resource));
             string a = _textStreamReader.ReadToEnd();
 
@@ -225,11 +232,14 @@ namespace BootstrapControls.Controls
             {
                 switch (this.GroupStyle)
                 {
-                    case Enumerations.FormGroupStyle.Success: cssGroupClass += " has-success";
+                    case Enumerations.FormGroupStyle.Success:
+                        cssGroupClass += " has-success";
                         break;
-                    case Enumerations.FormGroupStyle.Warning: cssGroupClass += " has-warning";
+                    case Enumerations.FormGroupStyle.Warning:
+                        cssGroupClass += " has-warning";
                         break;
-                    case Enumerations.FormGroupStyle.Error: cssGroupClass += " has-error";
+                    case Enumerations.FormGroupStyle.Error:
+                        cssGroupClass += " has-error";
                         break;
                 }
             }
@@ -295,7 +305,8 @@ namespace BootstrapControls.Controls
             sb.Append(Environment.NewLine);
 
             string linkedDtp = "null";
-            if(this.DateTimePickerUsedAsMax != null && !string.IsNullOrEmpty(this.DateTimePickerUsedAsMax))
+            if (this.DateTimePickerUsedAsMax != null && !string.IsNullOrEmpty(this.DateTimePickerUsedAsMax) &&
+                this.Page != null)
             {
                 var dtpControl = this.Page.FindControlRecursive(this.DateTimePickerUsedAsMax);
                 if (dtpControl is DateTimePickerInput)
@@ -304,19 +315,19 @@ namespace BootstrapControls.Controls
                 }
                 else
                 {
-                    throw new Exception("Error rendering DateTimePicker control: " + this.DateTimePickerUsedAsMax + " could not be found or is not of the correct Type.");
+                    throw new Exception("Error rendering DateTimePicker control: " + this.DateTimePickerUsedAsMax +
+                                        " could not be found or is not of the correct Type.");
                 }
             }
 
             sb.Append("<script type=\"text/javascript\">");
-            sb.Append("$(window).load(function() { CreateDateTimePicker($(\"#" + this.InternalId + "\"),\"" + this.Language + "\", \"" + this.DateTimeMask + "\", " + linkedDtp + "); })");
+            sb.Append("$(window).load(function() { CreateDateTimePicker($(\"#" + this.InternalId + "\"),\"" +
+                      this.Language + "\", \"" + this.DateTimeMask + "\", " + linkedDtp + "); })");
             sb.Append("</script>");
 
             Literal litEnd = new Literal();
             litEnd.Text = sb.ToString();
             litEnd.RenderControl(writer);
-
-
         }
     }
 }

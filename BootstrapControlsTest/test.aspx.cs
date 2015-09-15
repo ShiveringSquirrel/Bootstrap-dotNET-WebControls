@@ -16,7 +16,7 @@ namespace CentUA
                 TextInput1.Text = "AAAAA";
                 TextInput2.Text = "BBBBB";
 
-                DateTimePickerInput1.DateTimeValue = DateTime.Now.AddYears(-20);
+                dtpBirthDate.DateTimeValue = DateTime.Now.AddYears(-20);
             }
         }
 
@@ -26,7 +26,7 @@ namespace CentUA
             {
                 Button1.Text = TextInput1.Text + " " + TextInput2.Text + " Country:" +
                                SelectInput1.SelectedValue + " " +
-                               TextInput1.Label + " " + TextInput2.Label + " " + DateTimePickerInput1.DateTimeValue;
+                               TextInput1.Label + " " + TextInput2.Label + " Birthdate: " + dtpBirthDate.DateTimeValue;
 
                 this.lblAnimalsSelected.Text = "Your selected animal(s)<br>";
                 foreach (string animal in this.SelectListInput1.GetSelected(false))

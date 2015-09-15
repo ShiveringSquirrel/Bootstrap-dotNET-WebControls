@@ -85,13 +85,13 @@ namespace CentUA {
         protected global::BootstrapControls.Controls.TextInput TextInput4;
         
         /// <summary>
-        /// DateTimePickerInput1 control.
+        /// dtpBirthDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::BootstrapControls.Controls.DateTimePickerInput DateTimePickerInput1;
+        protected global::BootstrapControls.Controls.DateTimePickerInput dtpBirthDate;
         
         /// <summary>
         /// SelectInput1 control.

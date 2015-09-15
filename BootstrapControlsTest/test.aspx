@@ -79,7 +79,7 @@
                         <cc1:TextInput ID="TextInput4" runat="server" Label="Address"
                             Text="Street 1" State="Static"></cc1:TextInput>
 
-                        <cc1:DateTimePickerInput ID="DateTimePickerInput1"
+                        <cc1:DateTimePickerInput ID="dtpBirthDate"
                             runat="server"
                             Placeholder="Your birthdate"
                             Language="en-GB"
