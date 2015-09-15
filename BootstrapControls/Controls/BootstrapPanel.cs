@@ -11,20 +11,8 @@ namespace BootstrapControls.Controls
     [ToolboxData("<{0}:BootstrapPanel runat=\"server\"></{0}:BootstrapPanel")]
     [DefaultProperty("Text")]
     [Serializable]
-    [ParseChildren(true, "InnerChild")]
     public class BootstrapPanel : Panel, INamingContainer
     {
-        /// <summary>
-        /// This will be used to list all the inner controls of this panel.
-        /// </summary>
-        public Control InnerChild
-        {
-            set
-            {
-                this.Controls.Add(value);
-            }
-        }
-
         [Category("Appearance")]
         [Browsable(true)]
         [DefaultValue("")]
