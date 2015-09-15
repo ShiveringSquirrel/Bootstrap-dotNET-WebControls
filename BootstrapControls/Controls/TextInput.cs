@@ -214,9 +214,16 @@ namespace BootstrapControls.Controls
 
             if (!string.IsNullOrEmpty(this.Label))
             {
-                sb.Append("<label class=\"control-label\" for=\"");
-                sb.Append(this.ClientID);
-                sb.Append("\">");
+                sb.Append("<label class=\"control-label\"");
+
+                if (this.State != Enumerations.States.Static) //W3C: static will be rendered as a p, lbl cannot have a for property.
+                {
+                    sb.Append(" for=\"");
+                    sb.Append(this.ClientID);
+                    sb.Append("\"");
+                }
+
+                sb.Append(">");
                 sb.Append(this.Label);
                 sb.Append("</label>");
                 sb.Append(Environment.NewLine);
