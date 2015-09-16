@@ -9,7 +9,7 @@ namespace BootstrapControls.Controls
     //INamingContainer: Any control that implements this interface creates a new namespace in which all child control ID attributes are guaranteed to be unique within an entire application.  
 
     [ToolboxData("<{0}:BootstrapPanel runat=\"server\"></{0}:BootstrapPanel")]
-    [DefaultProperty("Text")]
+    [DefaultProperty("Title")]
     [Serializable]
     public class BootstrapPanel : Panel, INamingContainer
     {
