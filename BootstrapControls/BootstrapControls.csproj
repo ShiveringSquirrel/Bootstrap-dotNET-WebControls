@@ -54,6 +54,8 @@
     <Compile Include="Controls\SelectInput.cs" />
     <Compile Include="Controls\SelectListInput.cs" />
     <Compile Include="Controls\Switch.cs" />
+    <Compile Include="Controls\TabControl.cs" />
+    <Compile Include="Controls\TabPage.cs" />
     <Compile Include="Controls\TextInput.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="Extentions.cs" />

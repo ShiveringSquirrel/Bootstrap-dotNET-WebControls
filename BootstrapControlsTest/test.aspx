@@ -2,11 +2,6 @@
 
 <%@ Register Assembly="BootstrapControls" Namespace="BootstrapControls.Controls" TagPrefix="cc1" %>
 
-
-
-
-
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -17,20 +12,14 @@
     <link href="Content/font-awesome.min.css" rel="stylesheet" />
     <link href="Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <link href="Content/bootstrap-switch/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" />
-
     <link href="Content/bootstrap-chosen.css" rel="stylesheet" />
 
     <script src="Scripts/jquery-2.1.4.min.js"></script>
-
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/bootstrap-switch.min.js"></script>
-
-    <%--    <script src="Scripts/moment.min.js"></script>--%>
     <script src="Scripts/moment-with-locales.min.js"></script>
     <script src="Scripts/bootstrap-datetimepicker.min.js"></script>
     <script src="Scripts/chosen.jquery.min.js"></script>
-
-
 
     <title>Test page - custom controls</title>
 </head>
@@ -38,8 +27,7 @@
     <form id="form1" runat="server">
         <div class="container">
             <div class="row">
-                <div class="col-md-1">
-                </div>
+
                 <div class="col-md-3">
 
 
@@ -249,7 +237,39 @@
 
                 </div>
 
+                <div class="col-md-3">
+                    Last column...
+                </div>
+
             </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <cc1:TabControl runat="server" ID="tabControl1" UsePillsInsteadOfTabs="True">
+
+                        <cc1:TabPage runat="server" ID="page1" Title="Page 1">
+
+                            <h2>This is page 1<small>hiiiiiii</small></h2>
+                            <p>Er zijn vele variaties van passages van Lorem Ipsum beschikbaar maar het merendeel heeft te lijden gehad van wijzigingen in een of andere vorm, door ingevoegde humor of willekeurig gekozen woorden die nog niet half geloofwaardig ogen. Als u een passage uit Lorum Ipsum gaat gebruiken dient u zich ervan te verzekeren dat er niets beschamends midden in de tekst verborgen zit. Alle Lorum Ipsum generators op Internet hebben de eigenschap voorgedefinieerde stukken te herhalen waar nodig zodat dit de eerste echte generator is op internet. Het gebruikt een woordenlijst van 200 latijnse woorden gecombineerd met een handvol zinsstructuur modellen om een Lorum Ipsum te genereren die redelijk overkomt. De gegenereerde Lorum Ipsum is daardoor altijd vrij van herhaling, ingevoegde humor of ongebruikelijke woorden etc.</p>
+
+                        </cc1:TabPage>
+                        <cc1:TabPage runat="server" ID="page2" Title="Page 2">
+
+                            <h2>This is page 2<small>heloooooo</small></h2>
+                            <p>Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).</p>
+
+                            <asp:Button ID="Button2" runat="server" Text="Button" />
+
+                        </cc1:TabPage>
+
+                    </cc1:TabControl>
+                </div>
+
+            </div>
+
+
         </div>
     </form>
 </body>
