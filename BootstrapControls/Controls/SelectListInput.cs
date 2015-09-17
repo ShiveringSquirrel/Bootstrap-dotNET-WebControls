@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace BootstrapControls.Controls
 {
-    [ToolboxData("<{0}:SelectInput runat=\"server\" Label=\"\" Placeholder=\"\" />")]
+    [ToolboxData("<{0}:SelectListInput runat=\"server\" Label=\"\" Placeholder=\"\" />")]
     [Serializable]
     [ValidationProperty("SelectedValue")]
     public class SelectListInput : ListBox
