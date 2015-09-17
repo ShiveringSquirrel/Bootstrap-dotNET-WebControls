@@ -31,11 +31,6 @@
                 <div class="col-md-3">
 
 
-                    <asp:ValidationSummary ID="ValidationSummary1"
-                        CssClass="alert alert-danger"
-                        HeaderText="Please correct the following errors"
-                        runat="server" />
-
                     <div>
                         <cc1:TextInput ID="TextInput1" runat="server" Label="Name"
                             Placeholder="Your name" Text="" State="Normal" PrefixImageClass="fa fa-bolt"
@@ -135,20 +130,26 @@
                     <br />
 
                     <cc1:BootstrapPanel ID="bPanel" Title="Range test" runat="server">
+                        <Content>
+                            <b>Select both the start and end dates</b>
+                            <asp:ValidationSummary ID="ValidationSummary1"
+                                CssClass="alert alert-danger"
+                                HeaderText="Please correct the following errors"
+                                runat="server" />
 
-                        <cc1:DateTimePickerInput ID="DateTimePickerInputMin"
-                            runat="server"
-                            Language="en-GB"
-                            DateTimePickerUsedAsMax="DateTimePickerInputMax"
-                            Label="From date">
-                        </cc1:DateTimePickerInput>
+                            <cc1:DateTimePickerInput ID="DateTimePickerInputMin"
+                                runat="server"
+                                Language="en-GB"
+                                DateTimePickerUsedAsMax="DateTimePickerInputMax"
+                                Label="From date">
+                            </cc1:DateTimePickerInput>
 
-                        <cc1:DateTimePickerInput ID="DateTimePickerInputMax"
-                            runat="server"
-                            Language="en-GB"
-                            Label="To date">
-                        </cc1:DateTimePickerInput>
-
+                            <cc1:DateTimePickerInput ID="DateTimePickerInputMax"
+                                runat="server"
+                                Language="en-GB"
+                                Label="To date">
+                            </cc1:DateTimePickerInput>
+                        </Content>
                     </cc1:BootstrapPanel>
 
                     <cc1:Switch runat="server" ID="switch1" OnText="Yes" OffText="No" Label="Some checkbox" />
@@ -248,22 +249,22 @@
                 <div class="col-md-12">
 
                     <cc1:TabControl runat="server" ID="tabControl1" UsePillsInsteadOfTabs="True">
+                        <TabPages>
+                            <cc1:TabPage runat="server" ID="page1" Title="Page 1">
+                                <Content>
+                                    <h2>This is page 1<small>hiiiiiii</small></h2>
+                                    <p>Er zijn vele variaties van passages van Lorem Ipsum beschikbaar maar het merendeel heeft te lijden gehad van wijzigingen in een of andere vorm, door ingevoegde humor of willekeurig gekozen woorden die nog niet half geloofwaardig ogen. Als u een passage uit Lorum Ipsum gaat gebruiken dient u zich ervan te verzekeren dat er niets beschamends midden in de tekst verborgen zit. Alle Lorum Ipsum generators op Internet hebben de eigenschap voorgedefinieerde stukken te herhalen waar nodig zodat dit de eerste echte generator is op internet. Het gebruikt een woordenlijst van 200 latijnse woorden gecombineerd met een handvol zinsstructuur modellen om een Lorum Ipsum te genereren die redelijk overkomt. De gegenereerde Lorum Ipsum is daardoor altijd vrij van herhaling, ingevoegde humor of ongebruikelijke woorden etc.</p>
+                                </Content>
+                            </cc1:TabPage>
+                            <cc1:TabPage runat="server" ID="page2" Title="Page 2">
+                                <Content>
+                                    <h2>This is page 2<small>heloooooo</small></h2>
+                                    <p>Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).</p>
 
-                        <cc1:TabPage runat="server" ID="page1" Title="Page 1">
-
-                            <h2>This is page 1<small>hiiiiiii</small></h2>
-                            <p>Er zijn vele variaties van passages van Lorem Ipsum beschikbaar maar het merendeel heeft te lijden gehad van wijzigingen in een of andere vorm, door ingevoegde humor of willekeurig gekozen woorden die nog niet half geloofwaardig ogen. Als u een passage uit Lorum Ipsum gaat gebruiken dient u zich ervan te verzekeren dat er niets beschamends midden in de tekst verborgen zit. Alle Lorum Ipsum generators op Internet hebben de eigenschap voorgedefinieerde stukken te herhalen waar nodig zodat dit de eerste echte generator is op internet. Het gebruikt een woordenlijst van 200 latijnse woorden gecombineerd met een handvol zinsstructuur modellen om een Lorum Ipsum te genereren die redelijk overkomt. De gegenereerde Lorum Ipsum is daardoor altijd vrij van herhaling, ingevoegde humor of ongebruikelijke woorden etc.</p>
-
-                        </cc1:TabPage>
-                        <cc1:TabPage runat="server" ID="page2" Title="Page 2">
-
-                            <h2>This is page 2<small>heloooooo</small></h2>
-                            <p>Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).</p>
-
-                            <asp:Button ID="Button2" runat="server" Text="Button" />
-
-                        </cc1:TabPage>
-
+                                    <asp:Button ID="Button2" runat="server" Text="Button" />
+                                </Content>
+                            </cc1:TabPage>
+                        </TabPages>
                     </cc1:TabControl>
                 </div>
 

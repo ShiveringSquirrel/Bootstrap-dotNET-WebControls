@@ -17,19 +17,20 @@ namespace BootstrapControls.Controls
     public class TabControl : WebControl, INamingContainer
     {
         private TextBox lblActiveTab;
-        private List<TabPage> Tabs;
+        //private ITemplate Tabs;
 
         public TabControl()
         {
-            this.Tabs = new List<TabPage>();
+            //this.Tabs = new List<TabPage>();
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [TemplateContainer(typeof(TabPage))]
+        [TemplateInstance(TemplateInstance.Single)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public List<TabPage> TabPages
+        public ITemplate TabPages
         {
-            get { return Tabs; }
-            set { this.Tabs = value; }
+            get; /*{ return Tabs; }*/
+            set; /*{ this.Tabs = value; }*/
         }
 
         [Browsable(true)]
@@ -47,28 +48,36 @@ namespace BootstrapControls.Controls
             }
         }
 
-        protected override void RenderContents(HtmlTextWriter output)
+        /*protected override void RenderContents(HtmlTextWriter output)
         {
             this.RenderChildren(output);
             foreach (var tab in this.Tabs)
             {
                 tab.RenderControl(output);
             }
-        }
+        }*/
 
         protected override void CreateChildControls()
         {
+            // Remove any controls
+            this.Controls.Clear();
+
             lblActiveTab = new TextBox();
             lblActiveTab.ID = "lblActiveTab_" + this.ClientID;
             lblActiveTab.Style.Add("display", "none");
             this.Controls.Add(lblActiveTab);
-            base.CreateChildControls();
+
+            // Add all content to a container.
+            var container = new PlaceHolder();
+            //container.ID = Guid.NewGuid().ToString("N");
+            this.TabPages.InstantiateIn(container);
+
+            // Add container to the control collection.
+            this.Controls.Add(container);
         }
 
         public override void RenderBeginTag(HtmlTextWriter writer)
         {
-            //base.RenderBeginTag(writer);
-
             StringBuilder sb = new StringBuilder();
             sb.Append("<div id=\"Tabs\" role=\"tabpanel\">");
 
@@ -81,50 +90,71 @@ namespace BootstrapControls.Controls
                 sb.Append("<ul class=\"nav nav-tabs\" role=\"tablist\">");
             }
 
+            //The first control is our textbox, the second our placeholder
+            PlaceHolder container = Controls[1] as PlaceHolder;
+            var pControls = container.Controls;
+
             if (!string.IsNullOrEmpty(lblActiveTab.Text))
             {
-                foreach (var tab in Tabs)
+                foreach (Control c in pControls)
                 {
-                    tab.IsActive = false;
-                    if (tab.ClientID == lblActiveTab.Text)
+                    if (c is TabPage)
                     {
-                        tab.IsActive = true;
+                        var tab = (c as TabPage);
+                        tab.IsActive = false;
+                        if (tab.ClientID == lblActiveTab.Text)
+                        {
+                            tab.IsActive = true;
+                        }
                     }
                 }
             }
-            else if (Tabs.Count > 0)
+            else
             {
-                Tabs[0].IsActive = true;
-                lblActiveTab.Text = Tabs[0].ClientID;
+                foreach (Control c in pControls)
+                {
+                    if (c is TabPage)
+                    {
+                        (c as TabPage).IsActive = true;
+                        lblActiveTab.Text = c.ClientID;
+                        break;
+                    }
+                }
             }
 
-            foreach (var tab in this.Tabs)
+            foreach (Control c in pControls)
             {
-                string cssClass = "";
-                if (tab.IsActive)
+                if (c is TabPage)
                 {
-                    cssClass = " class=\"active\" ";
+                    var tab = (c as TabPage);
+                    string cssClass = "";
+                    if (tab.IsActive)
+                    {
+                        cssClass = " class=\"active\" ";
+                    }
+                    sb.Append("<li" + cssClass + ">");
+
+                    sb.Append("<a href=\"#" + tab.ClientID + "\" role=\"tab\" data-toggle=\"tab\" onclick='$(\"#" +
+                              lblActiveTab.ClientID + "\").val(\"" + tab.ClientID + "\");' aria-controls=\"" +
+                              tab.ClientID + "\">");
+
+                    if (!string.IsNullOrEmpty(tab.Title))
+                    {
+                        sb.Append(tab.Title);
+                    }
+                    else
+                    {
+                        sb.Append(tab.ID);
+                    }
+
+                    sb.Append("</a>");
+
+                    sb.Append("</li>");
                 }
-                sb.Append("<li" + cssClass + ">");
-
-                sb.Append("<a href=\"#" + tab.ClientID + "\" role=\"tab\" data-toggle=\"tab\" onclick='$(\"#" + lblActiveTab.ClientID + "\").val(\"" + tab.ClientID + "\");' aria-controls=\"" + tab.ClientID + "\">");
-
-                if (!string.IsNullOrEmpty(tab.Title))
-                {
-                    sb.Append(tab.Title);
-                }
-                else
-                {
-                    sb.Append(tab.ID);
-                }
-
-                sb.Append("</a>");
-
-                sb.Append("</li>");
             }
 
             sb.Append("</ul>");
-            sb.Append("<div class=\"tab-content\">");
+            sb.Append("<div class=\"tab-content\" style=\"padding-top: 20px\">");
 
             Literal litTop = new Literal();
             litTop.Text = sb.ToString();
@@ -141,6 +171,15 @@ namespace BootstrapControls.Controls
             //writer.WriteLine("</script>");
 
             //base.RenderEndTag(writer);
+        }
+
+        protected override void OnInit(System.EventArgs e)
+        {
+            base.OnInit(e);
+
+            // Initialize all child controls.
+            this.CreateChildControls();
+            this.ChildControlsCreated = true;
         }
     }
 }

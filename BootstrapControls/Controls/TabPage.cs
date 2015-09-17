@@ -14,15 +14,20 @@ namespace BootstrapControls.Controls
     [ToolboxData("<{0}:TabPage runat=\"server\" Title=\"\"></{0}:TabPage>")]
     [ToolboxItem(false)]
     [DefaultProperty("Title")]
-    [Serializable]
-    //[ParseChildren(ChildrenAsProperties = true)]
-    //[ParseChildren(true, "TabControls")]
-    //[ParseChildren(typeof(Control), DefaultProperty = "TabContent", ChildrenAsProperties = true)]
-    public class TabPage : Panel, INamingContainer
+    [ParseChildren(true, "Content")]
+    public class TabPage : WebControl, INamingContainer
     {
-        //[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        //[PersistenceMode(PersistenceMode.InnerProperty)]
-        //public Control TabControls { get; set; }
+        private ITemplate contentTemplate = null;
+
+        [TemplateContainer(typeof(TabPage))]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [TemplateInstance(TemplateInstance.Single)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public virtual ITemplate Content
+        {
+            get;
+            set;
+        }
 
         [NotifyParentProperty(true)]
         [Browsable(true)]
@@ -57,7 +62,7 @@ namespace BootstrapControls.Controls
             }
         }
 
-        public override void RenderControl(HtmlTextWriter writer)
+        public override void RenderBeginTag(HtmlTextWriter writer)
         {
             string cssClasss = "tab-pane";
 
@@ -74,15 +79,11 @@ namespace BootstrapControls.Controls
             Literal litBegin = new Literal();
             litBegin.Text = sb.ToString();
             litBegin.RenderControl(writer);
+        }
 
-            /*foreach (Control c in InnerControls)
-            {
-                TabControls.RenderControl(htmlWriter);
-            }*/
-
-            base.RenderChildren(writer);
-
-            sb = new StringBuilder();
+        public override void RenderEndTag(HtmlTextWriter writer)
+        {
+            StringBuilder sb = new StringBuilder();
 
             sb.Append("</div>");
             sb.Append(Environment.NewLine);
@@ -92,80 +93,27 @@ namespace BootstrapControls.Controls
             litEnd.RenderControl(writer);
         }
 
-        //public override void RenderBeginTag(HtmlTextWriter writer)
-        //{
-        //    string cssClasss = "tab-pane";
+        protected override void CreateChildControls()
+        {
+            // Remove any controls
+            this.Controls.Clear();
 
-        //    if (IsActive)
-        //    {
-        //        cssClasss += " active";
-        //    }
+            // Add all content to a container.
+            var container = new Panel();
+            //container.ID = Guid.NewGuid().ToString("N");
+            this.Content.InstantiateIn(container);
 
-        //    StringBuilder sb = new StringBuilder();
+            // Add container to the control collection.
+            this.Controls.Add(container);
+        }
 
-        //    sb.Append("<div role=\"tabpanel\" class=\"" + cssClasss + "\" id=\"" + this.ClientID + "\">");
-        //    sb.Append(Environment.NewLine);
+        protected override void OnInit(System.EventArgs e)
+        {
+            base.OnInit(e);
 
-        //    Literal litBegin = new Literal();
-        //    litBegin.Text = sb.ToString();
-        //    litBegin.RenderControl(writer);
-        //}
-
-        //[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        //[PersistenceMode(PersistenceMode.InnerProperty)]
-        //public List<Control> TabContent
-        //{
-        //    get
-        //    {
-        //        List<Control> controls = new List<Control>();
-        //        foreach (Control control in this.Controls)
-        //        {
-        //            controls.Add(control);
-        //        }
-        //        return controls;
-        //    }
-        //    set
-        //    {
-        //        foreach (var control in value)
-        //        {
-        //            this.Controls.Add(control);
-        //        }
-        //    }
-        //}
-
-        ////[TemplateContainer(typeof(TemplateControl))]
-        ////[PersistenceMode(PersistenceMode.InnerProperty)]
-        ////[TemplateInstance(TemplateInstance.Single)]
-        //[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        //[PersistenceMode(PersistenceMode.InnerProperty)]
-        //public List<Control> TabContent
-        //{
-        //    get { return this.InnerControls; }
-        //    set { this.InnerControls = value; }
-        //    //{
-        //    //    if (value is Control)
-        //    //    {
-        //    //        this.Controls.Add(value.Controls[0]);
-        //    //        EnsureChildControls();
-        //    //    }
-        //    //}
-        //}
-
-        //public override void RenderEndTag(HtmlTextWriter writer)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-
-        //    sb.Append("</div>");
-        //    sb.Append(Environment.NewLine);
-
-        //    Literal litEnd = new Literal();
-        //    litEnd.Text = sb.ToString();
-        //    litEnd.RenderControl(writer);
-        //}
-
-        //protected override void RenderContents(HtmlTextWriter output)
-        //{
-        //    this.RenderChildren(output);
-        //}
+            // Initialize all child controls.
+            this.CreateChildControls();
+            this.ChildControlsCreated = true;
+        }
     }
 }

@@ -10,9 +10,19 @@ namespace BootstrapControls.Controls
 
     [ToolboxData("<{0}:BootstrapPanel runat=\"server\"></{0}:BootstrapPanel")]
     [DefaultProperty("Title")]
-    [Serializable]
-    public class BootstrapPanel : Panel, INamingContainer
+    [ParseChildren(true, "Content")]
+    public class BootstrapPanel : WebControl, INamingContainer
     {
+        [TemplateContainer(typeof(BootstrapPanel))]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [TemplateInstance(TemplateInstance.Single)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public virtual ITemplate Content
+        {
+            get;
+            set;
+        }
+
         [Category("Appearance")]
         [Browsable(true)]
         [DefaultValue("")]
@@ -65,12 +75,21 @@ namespace BootstrapControls.Controls
             litEnd.RenderControl(writer);
         }
 
-        protected override void RenderContents(HtmlTextWriter output)
+        protected override void CreateChildControls()
         {
-            this.RenderChildren(output);
+            // Remove any controls
+            this.Controls.Clear();
+
+            // Add all content to a container.
+            var container = new Panel();
+            //container.ID = Guid.NewGuid().ToString("N");
+            this.Content.InstantiateIn(container);
+
+            // Add container to the control collection.
+            this.Controls.Add(container);
         }
 
-        protected override void OnInit(EventArgs e)
+        protected override void OnInit(System.EventArgs e)
         {
             base.OnInit(e);
 

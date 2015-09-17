@@ -28,7 +28,7 @@ namespace CentUA
                 Button1.Text = TextInput1.Text + " " + TextInput2.Text + " Country:" +
                                SelectInput1.SelectedValue + " " +
                                TextInput1.Label + " " + TextInput2.Label + " Birthdate: " + dtpBirthDate.DateTimeValue
-                               + " Switch value = " + this.switch1.Checked
+                               + " Switch value = " + this.switch1.Checked + " From date: " + DateTimePickerInputMin.DateTimeValue
                                ;
 
                 this.lblAnimalsSelected.Text = "Your selected animal(s)<br>";
