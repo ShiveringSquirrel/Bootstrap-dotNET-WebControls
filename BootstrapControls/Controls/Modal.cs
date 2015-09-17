@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BootstrapControls;
 
 namespace BootstrapControls.Controls
 {
@@ -21,6 +22,14 @@ namespace BootstrapControls.Controls
 
         protected override void OnLoad(EventArgs e)
         {
+            Control ctrl = this.Page.GetPostBackControl();
+            if (ctrl != null)
+            {
+                if (ctrl.ClientID.Contains(this.ID))
+                {
+                    ShowModal();
+                }
+            }
             base.OnLoad(e);
         }
 
@@ -45,6 +54,18 @@ namespace BootstrapControls.Controls
             }
         }
 
+        private void ShowModal()
+        {
+            string resource = "BootstrapControls.Resources.ModalFormShowOnError." + this.ClientID;
+            string script = "$(window).load(function() { $('#" + this.ClientID + "').modal('show'); })";
+
+            ClientScriptManager manager = (HttpContext.Current.Handler as Page).ClientScript;
+            if (!manager.IsClientScriptBlockRegistered(manager.GetType(), resource))
+            {
+                manager.RegisterClientScriptBlock(manager.GetType(), resource, script, true);
+            }
+        }
+
         // Handler for Submit Button. Do some validation before
         // calling the event.
         void btnSubmit_Click(object sender, System.EventArgs e)
@@ -57,14 +78,7 @@ namespace BootstrapControls.Controls
                 }
                 if (!Page.IsValid)
                 {
-                    string resource = "BootstrapControls.Resources.ModalFormShowOnError." + this.ClientID;
-                    string script = "$(window).load(function() { $('#" + this.ClientID + "').modal('show'); })";
-
-                    ClientScriptManager manager = (HttpContext.Current.Handler as Page).ClientScript;
-                    if (!manager.IsClientScriptBlockRegistered(manager.GetType(), resource))
-                    {
-                        manager.RegisterClientScriptBlock(manager.GetType(), resource, script, true);
-                    }
+                    ShowModal();
                 }
             }
 
@@ -157,14 +171,14 @@ namespace BootstrapControls.Controls
 
         [Category("Validation")]
         [Browsable(true)]
-        [DefaultValue("False")]
+        [DefaultValue("True")]
         [Description("Does this modal form (submit button) cause validation?")]
         [Localizable(false)]
         public bool CausesValidation
         {
             get
             {
-                return ViewState.GetPropertyValue("CausesValidation", false);
+                return ViewState.GetPropertyValue("CausesValidation", true);
             }
             set
             {
