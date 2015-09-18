@@ -69,11 +69,11 @@ namespace BootstrapControls.Controls
             }
         }
 
-        [Category("Appearance")]
+        [Category("Data")]
         [Browsable(true)]
         [DefaultValue("")]
         [Description("The group field for this select. When filled in you also have to set Chzn for it to work. Then it will render optgroups.")]
-        [Localizable(true)]
+        [Localizable(false)]
         public string DataGroupField
         {
             get
@@ -275,15 +275,10 @@ namespace BootstrapControls.Controls
             if (AddChznClass)
             {
                 sb.Append("<script type=\"text/javascript\">");
-                sb.Append(Environment.NewLine);
                 sb.Append("$(window).load(function() { ");
-                sb.Append(Environment.NewLine);
                 sb.Append("$(\"#" + this.ClientID + "\").chosen({allow_single_deselect: true});");
-                sb.Append(Environment.NewLine);
                 sb.Append(" })");
-                sb.Append(Environment.NewLine);
                 sb.Append("</script>");
-                sb.Append(Environment.NewLine);
             }
 
             Literal litEnd = new Literal();
