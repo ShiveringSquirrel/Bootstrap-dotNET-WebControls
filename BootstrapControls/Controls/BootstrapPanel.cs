@@ -96,11 +96,8 @@ namespace BootstrapControls.Controls
 
                 bSwitch = new Switch();
                 bSwitch.Size = Enumerations.SwitchSize.Small;
-                //bsswitch.ID = gSwitch.ToString();
-                if (!Page.IsPostBack)
-                {
-                    bSwitch.Checked = !PanelIsInitiallyHidden;
-                }
+                bSwitch.Checked = !PanelIsInitiallyHidden;
+
                 bSwitch.OffText = "<i class=\"glyphicon glyphicon-remove\">";
                 bSwitch.OnText = "<i class=\"glyphicon glyphicon-ok\">";
                 this.Controls.Add(bSwitch);
@@ -160,6 +157,13 @@ namespace BootstrapControls.Controls
             Literal litEnd = new Literal();
             litEnd.Text = sb.ToString();
             litEnd.RenderControl(writer);
+        }
+
+        protected override void RenderChildren(HtmlTextWriter writer)
+        {
+            this.Controls.Remove(bSwitch);
+            base.RenderChildren(writer);
+            this.Controls.Add(bSwitch);
         }
 
         protected override void CreateChildControls()
