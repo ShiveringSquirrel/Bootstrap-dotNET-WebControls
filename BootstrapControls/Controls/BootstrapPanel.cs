@@ -161,9 +161,16 @@ namespace BootstrapControls.Controls
 
         protected override void RenderChildren(HtmlTextWriter writer)
         {
-            this.Controls.Remove(bSwitch);
-            base.RenderChildren(writer);
-            this.Controls.Add(bSwitch);
+            if (bSwitch != null)
+            {
+                this.Controls.Remove(bSwitch);
+                base.RenderChildren(writer);
+                this.Controls.Add(bSwitch);
+            }
+            else
+            {
+                base.RenderChildren(writer);
+            }
         }
 
         protected override void CreateChildControls()
