@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,6 +14,8 @@ namespace BootstrapControls.Controls
     [ParseChildren(true, "Content")]
     public class BootstrapPanel : WebControl, INamingContainer
     {
+        private Switch bSwitch;
+
         [TemplateContainer(typeof(BootstrapPanel))]
         [PersistenceMode(PersistenceMode.InnerProperty)]
         [TemplateInstance(TemplateInstance.Single)]
@@ -40,6 +43,40 @@ namespace BootstrapControls.Controls
             }
         }
 
+        [Category("Appearance")]
+        [Browsable(true)]
+        [DefaultValue(false)]
+        [Description("Does this panel have a button to collapse it.")]
+        [Localizable(false)]
+        public bool CreateHideButton
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("CreateHideButton", false);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("CreateHideButton", value);
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [DefaultValue(false)]
+        [Description("Only works with hide button enabled. This specifies if the panel is initially hidden.")]
+        [Localizable(false)]
+        public bool PanelIsInitiallyHidden
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("PanelIsInitiallyHidden", false);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("PanelIsInitiallyHidden", value);
+            }
+        }
+
         public override void RenderBeginTag(HtmlTextWriter writer)
         {
             StringBuilder sb = new StringBuilder();
@@ -48,12 +85,62 @@ namespace BootstrapControls.Controls
 
             sb.Append("<div class=\"panel-heading\">");
             sb.Append(Environment.NewLine);
-            sb.Append(this.Title);
+
+            Guid gPanel = Guid.NewGuid();
+            //Guid gSwitch = Guid.NewGuid();
+
+            if (CreateHideButton)
+            {
+                sb.Append(this.Title);
+                sb.Append("<div class=\"btn-group pull-right\"  style=\"margin-top: -5px\">");
+
+                bSwitch = new Switch();
+                bSwitch.Size = Enumerations.SwitchSize.Small;
+                //bsswitch.ID = gSwitch.ToString();
+                if (!Page.IsPostBack)
+                {
+                    bSwitch.Checked = !PanelIsInitiallyHidden;
+                }
+                bSwitch.OffText = "<i class=\"glyphicon glyphicon-remove\">";
+                bSwitch.OnText = "<i class=\"glyphicon glyphicon-ok\">";
+                this.Controls.Add(bSwitch);
+
+                TextWriter txtWriter = new StringWriter();
+                HtmlTextWriter htmlWriter = new HtmlTextWriter(txtWriter);
+                bSwitch.RenderControl(htmlWriter);
+                sb.Append(txtWriter);
+
+                sb.Append("<script type=\"text/javascript\">");
+                sb.Append("$(window).load(function() {");
+                sb.Append("if($('#" + bSwitch.ClientID + "').attr('checked')){");
+                sb.Append("$('#" + gPanel + "').show();");
+                sb.Append("}");
+                sb.Append("else{");
+                sb.Append("$('#" + gPanel + "').hide();");
+                sb.Append("}");
+                sb.Append("});");
+                sb.Append("$('#" + bSwitch.ClientID + "').on('switchChange.bootstrapSwitch', function(event, state) {");
+                sb.Append("if(state){");
+                sb.Append("$('#" + gPanel + "').slideDown(500);");
+                sb.Append("}");
+                sb.Append("else{");
+                sb.Append("$('#" + gPanel + "').slideUp(500);");
+                sb.Append("}");
+                sb.Append("});");
+                sb.Append("</script>");
+
+                sb.Append("</div>");
+            }
+            else
+            {
+                sb.Append(this.Title);
+            }
+
             sb.Append(Environment.NewLine);
             sb.Append("</div>");
             sb.Append(Environment.NewLine);
 
-            sb.Append("<div class=\"panel-body\">");
+            sb.Append("<div class=\"panel-body\" id=\"" + gPanel + "\">");
             sb.Append(Environment.NewLine);
 
             Literal litEnd = new Literal();

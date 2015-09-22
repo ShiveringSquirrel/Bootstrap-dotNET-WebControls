@@ -129,7 +129,7 @@
                     <asp:Label ID="lblAnimalsSelected" runat="server" Text="Your selected animals..."></asp:Label>
                     <br />
 
-                    <cc1:BootstrapPanel ID="bPanel" Title="Range test" runat="server">
+                    <cc1:BootstrapPanel ID="bPanel" Title="Range test" runat="server" CreateHideButton="true">
                         <Content>
                             <b>Select both the start and end dates</b>
                             <asp:ValidationSummary ID="ValidationSummary1"
