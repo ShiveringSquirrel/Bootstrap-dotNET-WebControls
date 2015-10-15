@@ -49,6 +49,7 @@
     <Compile Include="Controls\BootstrapPanel.cs" />
     <Compile Include="Controls\ButtonInput.cs" />
     <Compile Include="Controls\DateTimePickerInput.cs" />
+    <Compile Include="Controls\FileUploader.cs" />
     <Compile Include="Controls\Modal.cs" />
     <Compile Include="Controls\Pagination.cs" />
     <Compile Include="Controls\SelectInput.cs" />
@@ -64,6 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\DateTimePickerInput.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\FileUploader.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
