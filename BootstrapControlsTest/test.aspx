@@ -239,7 +239,15 @@
                 </div>
 
                 <div class="col-md-3">
-                    Last column...
+                    
+                    <cc1:FileUploader ID="FileUploader1" runat="server" Label="Image 1" />
+                    <img id="imgFileUploader1" runat="server" /><br />
+                    
+                    <cc1:FileUploader ID="FileUploader2" runat="server" Label="Image 2" />
+                    <img id="imgFileUploader2" runat="server" /><br />
+
+                    <asp:Button id="btnSaveUpload" runat="server" Text="Upload files" OnClick="btnSaveUpload_Click" />
+
                 </div>
 
             </div>

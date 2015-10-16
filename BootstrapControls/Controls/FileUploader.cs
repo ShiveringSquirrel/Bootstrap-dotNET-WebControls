@@ -51,18 +51,7 @@ namespace BootstrapControls.Controls
         }
 
         public FileUploader()
-        {
-            string resource = "BootstrapControls.Resources.FileUploader.js";
-            var _assembly = Assembly.GetExecutingAssembly();
-
-            var _textStreamReader = new StreamReader(_assembly.GetManifestResourceStream(resource));
-            string a = _textStreamReader.ReadToEnd();
-
-            ClientScriptManager manager = (HttpContext.Current.Handler as Page).ClientScript;
-            if (!manager.IsClientScriptBlockRegistered(manager.GetType(), resource))
-            {
-                manager.RegisterClientScriptBlock(manager.GetType(), resource, a, true);
-            }
+        {            
         }
 
         protected override void CreateChildControls()
@@ -89,7 +78,7 @@ namespace BootstrapControls.Controls
             {
                 cssGroupClass += " has-error";
             }*/
-
+            
             sb.Append("<div class=\"");
             sb.Append(cssGroupClass);
             sb.Append("\">");
@@ -104,18 +93,95 @@ namespace BootstrapControls.Controls
                 sb.Append(Environment.NewLine);
             }
 
-            sb.Append("<div class=\"input-group image-preview\">");
-            sb.Append("<input type=\"text\" class=\"form-control image-preview-filename\" disabled=\"disabled\">");
+            string imagePreviewId = Guid.NewGuid().ToString("N");
+
+            sb.Append("<div class=\"input-group\" id=\""+ imagePreviewId + "\">");
+            sb.Append("<input type=\"text\" class=\"form-control\" id=\"" + imagePreviewId + "-filename\" disabled=\"disabled\">");
 
             sb.Append("<span class=\"input-group-btn\">");
-            sb.Append("<button type=\"button\" class=\"btn btn-default image-preview-clear\" style=\"display: none;\">");
+            sb.Append("<button type=\"button\" class=\"btn btn-default\" id=\"" + imagePreviewId + "-clear\" style=\"display: none;\">");
             sb.Append("<span class=\"glyphicon glyphicon-remove\"></span>&nbsp;Clear");
             sb.Append("</button > ");
 
             //style=\"position: relative; overflow: hidden; margin: 0px; color: #333; background-color: #fff; border-color: #ccc;\"
-            sb.Append("<div class=\"btn btn-default image-preview-input\">");
+            sb.Append("<div class=\"btn btn-default\" id=\"" + imagePreviewId + "-input\">");
             sb.Append("<span class=\"glyphicon glyphicon-folder-open\"></span>");
-            sb.Append("<span class=\"image-preview-input-title\" style=\"margin-left: 2px;\">&nbsp;Browse</span>");
+            sb.Append("<span id=\"" + imagePreviewId + "-input-title\" style=\"margin-left: 2px;\">&nbsp;Browse</span>");
+
+            string closeButtonId = Guid.NewGuid().ToString("N");
+
+            sb.Append(Environment.NewLine);
+            sb.Append("<script>");
+            sb.Append(Environment.NewLine);
+
+            sb.Append(@"$(document).on('click', '#" + closeButtonId + @"', function () {
+                            $('#" + imagePreviewId + @"').popover('hide');
+                            $('#" + imagePreviewId + @"').hover(
+                                function() {
+                                    $('#" + imagePreviewId + @"').popover('show');
+                                },
+                                function() {
+                                    $('#" + imagePreviewId + @"').popover('hide');
+                                }
+                            );
+                        });"
+            );
+
+            sb.Append(Environment.NewLine);
+
+            sb.Append(@"$(function() {
+
+                // Create the close button
+                var closebtn = $('<button/>', {
+                    type: ""button"",
+                    text: 'x',
+                    id: '" + closeButtonId + @"',
+                    style: 'font-size: initial;',
+                });
+                closebtn.attr(""class"", ""close pull-right"");
+                
+                // Set the popover default content
+                $('#" + imagePreviewId + @"').popover({
+                    trigger: 'manual',
+                     html: true,
+                    title: ""<strong>Preview</strong>"" + $(closebtn)[0].outerHTML,
+                    content: ""There's no image"",
+                    placement: 'bottom'
+                });
+
+                // Clear event
+                $('#" + imagePreviewId + @"-clear').click(function () {
+                    $('#" + imagePreviewId + @"').attr(""data-content"", """").popover('hide');
+                    $('#" + imagePreviewId + @"-filename').val("""");
+                    $('#" + imagePreviewId + @"-clear').hide();
+                    $('#" + imagePreviewId + @"-input input:file').val("""");
+                    $('#" + imagePreviewId + @"-input-title').text(""Browse"");
+                });
+
+                // Create the preview image
+                $('#" + imagePreviewId + @"-input input:file').change(function () {
+                    var img = $('<img/>', {
+                        id: 'dynamic',
+                        width: '250',
+                        height: 'auto'
+                    });
+                    var file = this.files[0];
+                    var reader = new FileReader();
+                    
+                    // Set preview image into the popover data-content
+                    reader.onload = function(e) {
+                        $('#" + imagePreviewId + @"-title').text(""Change"");
+                        $('#" + imagePreviewId + @"-clear').show();
+                        $('#" + imagePreviewId + @"-filename').val(file.name);
+                        img.attr('src', e.target.result);
+                        $('#" + imagePreviewId + @"').attr('data-content', $(img)[0].outerHTML).popover('show');
+                        }
+                        reader.readAsDataURL(file);
+                    });
+                });
+            ");
+
+            sb.Append("</script>");
 
             var litEnd = new Literal();
             litEnd.Text = sb.ToString();

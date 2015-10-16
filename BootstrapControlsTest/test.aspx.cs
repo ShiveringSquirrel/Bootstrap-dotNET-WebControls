@@ -55,6 +55,19 @@ namespace CentUA
             }
         }
 
+        protected void btnSaveUpload_Click(object sender, EventArgs e)
+        {
+            byte[] myData = this.FileUploader1.GetData();
+            if(myData.Length > 0)
+            {
+                this.imgFileUploader1.Src = "data:image/jpg;base64," + Convert.ToBase64String(myData);
+            }
 
+            byte[] myData2 = this.FileUploader2.GetData();
+            if (myData2.Length > 0)
+            {
+                this.imgFileUploader2.Src = "data:image/jpg;base64," + Convert.ToBase64String(myData2);
+            }
+        }
     }
 }
