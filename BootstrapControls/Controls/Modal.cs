@@ -15,10 +15,9 @@ namespace BootstrapControls.Controls
 {
     [ToolboxData("<{0}:Modal runat=\"server\"></{0}:Modal>")]
     [ToolboxBitmap(typeof(System.Web.UI.WebControls.Panel))]
-    //[ParseChildren(true, "Children")]
     public class Modal : Panel, INamingContainer
     {
-        private ButtonInput btnSubmit;
+        //private ButtonInput btnSubmit;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -254,7 +253,7 @@ namespace BootstrapControls.Controls
 
             sb = new StringBuilder();
 
-            btnSubmit = new ButtonInput();
+            var btnSubmit = new ButtonInput();
             btnSubmit.ID = "btnSubmit";
             btnSubmit.ButtonStyle = Enumerations.ButtonStyle.Primary;
             btnSubmit.Text = "Submit";
@@ -304,18 +303,18 @@ namespace BootstrapControls.Controls
             litEnd.RenderControl(writer);
         }
 
-        protected override void RenderContents(HtmlTextWriter output)
+        /*protected override void RenderContents(HtmlTextWriter output)
         {
             this.RenderChildren(output);
         }
 
-        protected override void OnInit(EventArgs e)
+        protected override void OnPreRender(EventArgs e)
         {
-            base.OnInit(e);
+            base.OnPreRender(e);
 
             // Initialize all child controls.
             this.CreateChildControls();
             this.ChildControlsCreated = true;
-        }
+        }*/
     }
 }

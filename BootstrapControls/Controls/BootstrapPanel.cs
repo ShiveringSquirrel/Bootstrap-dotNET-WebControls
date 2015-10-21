@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Web.UI;
@@ -11,12 +12,12 @@ namespace BootstrapControls.Controls
 
     [ToolboxData("<{0}:BootstrapPanel runat=\"server\"></{0}:BootstrapPanel")]
     [DefaultProperty("Title")]
-    [ParseChildren(true, "Content")]
-    public class BootstrapPanel : WebControl, INamingContainer
+    [ToolboxBitmap(typeof(System.Web.UI.WebControls.Panel))]
+    public class BootstrapPanel : Panel, INamingContainer
     {
         private Switch bSwitch;
 
-        [TemplateContainer(typeof(BootstrapPanel))]
+        /*[TemplateContainer(typeof(BootstrapPanel))]
         [PersistenceMode(PersistenceMode.InnerProperty)]
         [TemplateInstance(TemplateInstance.Single)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
@@ -24,7 +25,7 @@ namespace BootstrapControls.Controls
         {
             get;
             set;
-        }
+        }*/
 
         [Category("Appearance")]
         [Browsable(true)]
@@ -173,7 +174,7 @@ namespace BootstrapControls.Controls
             }
         }
 
-        protected override void CreateChildControls()
+        /*protected override void CreateChildControls()
         {
             // Remove any controls
             this.Controls.Clear();
@@ -185,7 +186,7 @@ namespace BootstrapControls.Controls
 
             // Add container to the control collection.
             this.Controls.Add(container);
-        }
+        }*/
 
         protected override void OnInit(System.EventArgs e)
         {

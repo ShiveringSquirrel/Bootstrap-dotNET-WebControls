@@ -14,10 +14,10 @@ namespace BootstrapControls.Controls
     [ToolboxData("<{0}:TabPage runat=\"server\" Title=\"\"></{0}:TabPage>")]
     [ToolboxItem(false)]
     [DefaultProperty("Title")]
-    [ParseChildren(true, "Content")]
-    public class TabPage : WebControl, INamingContainer
+    //[ParseChildren(true, "Content")]
+    public class TabPage : Panel, INamingContainer
     {
-        private ITemplate contentTemplate = null;
+        /*private ITemplate contentTemplate = null;
 
         [TemplateContainer(typeof(TabPage))]
         [PersistenceMode(PersistenceMode.InnerProperty)]
@@ -27,7 +27,7 @@ namespace BootstrapControls.Controls
         {
             get;
             set;
-        }
+        }*/
 
         [NotifyParentProperty(true)]
         [Browsable(true)]
@@ -93,7 +93,7 @@ namespace BootstrapControls.Controls
             litEnd.RenderControl(writer);
         }
 
-        protected override void CreateChildControls()
+        /*protected override void CreateChildControls()
         {
             // Remove any controls
             this.Controls.Clear();
@@ -105,7 +105,7 @@ namespace BootstrapControls.Controls
 
             // Add container to the control collection.
             this.Controls.Add(container);
-        }
+        }*/
 
         protected override void OnInit(System.EventArgs e)
         {
