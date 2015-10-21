@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace BootstrapControls.Controls
 {
     [ToolboxData("<{0}:ButtonInput runat=\"server\" Text=\"\" ButtonStyle=\"Default\" />")]
     [DefaultProperty("Text")]
-    [Serializable]
+    [ToolboxBitmap(typeof(System.Web.UI.WebControls.Button))]
     public class ButtonInput : Button
     {
         [Category("Appearance")]
@@ -102,14 +103,17 @@ namespace BootstrapControls.Controls
             string modalLink = "";
             if (this.ModalWindowIdToOpen != null && !string.IsNullOrEmpty(this.ModalWindowIdToOpen))
             {
-                var mControl = this.Page.FindControlRecursive(this.ModalWindowIdToOpen);
-                if (mControl is Modal)
+                if (!this.DesignMode)
                 {
-                    modalLink = "#" + mControl.ClientID;
-                }
-                else
-                {
-                    throw new Exception("Error rendering ButtonInput control: " + this.ModalWindowIdToOpen + " could not be found or is not of the correct Type.");
+                    var mControl = this.Page.FindControlRecursive(this.ModalWindowIdToOpen);
+                    if (mControl is Modal)
+                    {
+                        modalLink = "#" + mControl.ClientID;
+                    }
+                    else
+                    {
+                        throw new Exception("Error rendering ButtonInput control: " + this.ModalWindowIdToOpen + " could not be found or is not of the correct Type.");
+                    }
                 }
             }
 
