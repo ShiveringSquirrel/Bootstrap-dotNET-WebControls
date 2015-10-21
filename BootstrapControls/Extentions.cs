@@ -87,10 +87,11 @@ namespace BootstrapControls
                         foundControl = page.FindControl(ctl);
                     }
 
-                    if (!(foundControl is Button || foundControl is ImageButton)) continue;
-
-                    control = foundControl;
-                    break;
+                    if (foundControl is System.Web.UI.WebControls.Button || foundControl is System.Web.UI.WebControls.ImageButton)
+                    {
+                        control = foundControl;
+                        break;
+                    }
                 }
             }
 
