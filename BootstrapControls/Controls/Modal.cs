@@ -24,9 +24,12 @@ namespace BootstrapControls.Controls
             Control ctrl = this.Page.GetPostBackControl();
             if (ctrl != null)
             {
-                if (ctrl.ClientID.Contains(this.ID))
+                if (ctrl.ClientID.Contains(this.ID)) //This is needed for buttons inside the modal form that cause a postback
                 {
-                    ShowModal();
+                    if (!ctrl.ClientID.EndsWith("btnSubmit")) //It is not the sumbit button of this modal that caused the postback
+                    {
+                        ShowModal();
+                    }
                 }
             }
             base.OnLoad(e);
