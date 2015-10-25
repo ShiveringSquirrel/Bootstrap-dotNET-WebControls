@@ -13,7 +13,7 @@ namespace BootstrapControls.Controls
     [ToolboxData("<{0}:ButtonInput runat=\"server\" Text=\"\" ButtonStyle=\"Default\" />")]
     [DefaultProperty("Text")]
     [ToolboxBitmap(typeof(System.Web.UI.WebControls.Button))]
-    public class ButtonInput : Button
+    public class ButtonInput : Button, IButtonControl
     {
         [Category("Appearance")]
         [Browsable(true)]
