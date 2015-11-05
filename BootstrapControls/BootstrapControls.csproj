@@ -58,6 +58,7 @@
     <Compile Include="Controls\TabControl.cs" />
     <Compile Include="Controls\TabPage.cs" />
     <Compile Include="Controls\TextInput.cs" />
+    <Compile Include="Controls\TinymceEditor.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="Extentions.cs" />
     <Compile Include="GenericProperty.cs" />
