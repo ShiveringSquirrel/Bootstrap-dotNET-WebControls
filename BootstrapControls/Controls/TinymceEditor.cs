@@ -72,7 +72,7 @@ namespace BootstrapControls.Controls
         [DefaultValue("")]
         [Description("The text to display in this editor")]
         [Localizable(true)]
-        public string Text
+        public override string Text
         {
             get
             {
