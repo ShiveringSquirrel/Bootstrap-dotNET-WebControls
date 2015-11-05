@@ -154,6 +154,40 @@ namespace BootstrapControls.Controls
 
         [Category("Appearance")]
         [Browsable(true)]
+        [Description("The html elements that are kept after saving in this editor.")]
+        [Localizable(true)]
+        [DefaultValue("")]
+        public string ValidElements
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("ValidElements", "");
+            }
+            set
+            {
+                ViewState.SetPropertyValue("ValidElements", value);
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [Description("The toolbar items to display.")]
+        [Localizable(true)]
+        [DefaultValue("")]
+        public string Toolbar
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("Toolbar", "");
+            }
+            set
+            {
+                ViewState.SetPropertyValue("Toolbar", value);
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
         [Description("The language to use in this editor.")]
         [Localizable(true)]
         [DefaultValue("en")]
@@ -253,8 +287,12 @@ namespace BootstrapControls.Controls
                     {
                         selector: '#" + this.ClientID + @"',
                         encoding: 'xml',
-                        forced_root_block: '',
-                        menubar: " + this.ShowMenuBar.ToString().ToLower() + @",
+                        entity_encoding : 'raw',
+                        fix_list_elements : true,"
+                        + ((!string.IsNullOrEmpty(this.Toolbar)) ? "toolbar: '" + this.Toolbar + "'," : "") +
+                        @"forced_root_block: '',"
+                        + ((!string.IsNullOrEmpty(this.ValidElements)) ? "valid_elements : '" + this.ValidElements + "'," : "") +
+                        @"menubar: " + this.ShowMenuBar.ToString().ToLower() + @",
                         theme: '" + this.Theme + @"',
                         plugins: '" + this.Plugins + @"',
                         language: '" + this.Language + @"',
