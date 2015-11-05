@@ -15,6 +15,40 @@ namespace BootstrapControls.Controls
         [Category("Appearance")]
         [Browsable(true)]
         [DefaultValue("")]
+        [Description("Show a required asterik after the label.")]
+        [Localizable(false)]
+        public bool Required
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("Required", false);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("Required", value);
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [DefaultValue("fa fa-asterisk text-danger")]
+        [Description("What is the icon class to use when field is required.")]
+        [Localizable(false)]
+        public string RequiredIconClass
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("RequiredIconClass", "fa fa-asterisk text-danger");
+            }
+            set
+            {
+                ViewState.SetPropertyValue("RequiredIconClass", value);
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [DefaultValue("")]
         [Description("The label for this text. Ex: Name.")]
         [Localizable(true)]
         public string Label
@@ -106,6 +140,14 @@ namespace BootstrapControls.Controls
             {
                 writer.WriteLine("<label class=\"control-label\" for=\"" + this.ClientID + "\">");
                 writer.WriteLine(this.Label);
+
+                if (this.Required && !string.IsNullOrEmpty(this.RequiredIconClass))
+                {
+                    writer.WriteLine("&nbsp;<i class=\"");
+                    writer.WriteLine(this.RequiredIconClass);
+                    writer.WriteLine("\"></i>");
+                }
+
                 writer.WriteLine("</label>");
             }
 

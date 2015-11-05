@@ -19,6 +19,40 @@ namespace BootstrapControls.Controls
         [Category("Appearance")]
         [Browsable(true)]
         [DefaultValue("")]
+        [Description("Show a required asterik after the label.")]
+        [Localizable(false)]
+        public bool Required
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("Required", false);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("Required", value);
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [DefaultValue("fa fa-asterisk text-danger")]
+        [Description("What is the icon class to use when field is required.")]
+        [Localizable(false)]
+        public string RequiredIconClass
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("RequiredIconClass", "fa fa-asterisk text-danger");
+            }
+            set
+            {
+                ViewState.SetPropertyValue("RequiredIconClass", value);
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [DefaultValue("")]
         [Description("The label for this editor.")]
         [Localizable(true)]
         public string Label
@@ -184,6 +218,14 @@ namespace BootstrapControls.Controls
 
                 sb.Append(">");
                 sb.Append(this.Label);
+
+                if (this.Required && !string.IsNullOrEmpty(this.RequiredIconClass))
+                {
+                    sb.Append("&nbsp;<i class=\"");
+                    sb.Append(this.RequiredIconClass);
+                    sb.Append("\"></i>");
+                }
+
                 sb.Append("</label>");
                 sb.Append(Environment.NewLine);
             }
