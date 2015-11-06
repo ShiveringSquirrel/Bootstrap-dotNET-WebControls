@@ -102,7 +102,11 @@ namespace BootstrapControls.Controls
             StringBuilder sb = new StringBuilder();
             sb.Append("<div class=\"");
             sb.Append(cssClass);
-            sb.Append("\" role=\"alert\">");
+            sb.Append("\"");
+            sb.Append(" id=\"");
+            sb.Append(this.ClientID);
+            sb.Append("\"");
+            sb.Append(" role =\"alert\">");
 
             if (!string.IsNullOrEmpty(this.ImageClass))
             {
