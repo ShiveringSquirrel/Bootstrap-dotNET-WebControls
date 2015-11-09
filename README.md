@@ -14,3 +14,7 @@ Some nuget (or manually installed) packages are nesecary to make these controls 
 ## Not required but nice to have
 
 * Install-Package FontAwesome 
+ 
+## Wiki
+
+For more information or how to use the individual controls you can consult the wiki pages: [wiki pages](../../wiki)
