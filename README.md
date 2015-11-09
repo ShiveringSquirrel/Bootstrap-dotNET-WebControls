@@ -9,6 +9,7 @@ Some nuget (or manually installed) packages are nesecary to make these controls 
 * Install-Package Bootstrap.Switch
 * Install-Package Bootstrap.v3.Datetimepicker.CSS
 * Install-Package bootstrap.chosen
+* Install-Package TinyMCE (needed for TinyMCE control)
 
 ## Not required but nice to have
 
