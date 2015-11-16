@@ -35,6 +35,23 @@ namespace BootstrapControls.Controls
 
         [Category("Appearance")]
         [Browsable(true)]
+        [DefaultValue("")]
+        [Description("Use this control for tag input.")]
+        [Localizable(false)]
+        public bool TagInput
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("TagInput", false);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("TagInput", value);
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
         [DefaultValue("fa fa-asterisk text-danger")]
         [Description("What is the icon class to use when field is required.")]
         [Localizable(false)]
@@ -323,6 +340,11 @@ namespace BootstrapControls.Controls
                 if (!String.IsNullOrEmpty(this.Placeholder))
                 {
                     htmlWriter.AddAttribute("placeholder", this.Placeholder);
+                }
+
+                if(this.TagInput)
+                {
+                    htmlWriter.AddAttribute("data-role", "tagsinput");
                 }
 
                 if (this.State == Enumerations.States.Disabled)

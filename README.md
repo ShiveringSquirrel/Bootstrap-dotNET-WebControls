@@ -10,6 +10,7 @@ Some nuget (or manually installed) packages are nesecary to make these controls 
 * Install-Package Bootstrap.v3.Datetimepicker.CSS
 * Install-Package bootstrap.chosen
 * Install-Package TinyMCE (needed for TinyMCE control)
+* Install-Package bootstrap-tagsinput (needed for tags input in textbox)
 
 ## Not required but nice to have
 
