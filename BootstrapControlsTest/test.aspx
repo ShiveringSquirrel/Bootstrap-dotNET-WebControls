@@ -12,7 +12,8 @@
     <link href="Content/font-awesome.min.css" rel="stylesheet" />
     <link href="Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <link href="Content/bootstrap-switch/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" />
-    <link href="Content/bootstrap-chosen.css" rel="stylesheet" />
+    <link href="Content/chosen.css" rel="stylesheet" />
+    <link href="Content/chosen.bootstrap.css" rel="stylesheet" />
 
     <script src="Scripts/jquery-2.1.4.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
