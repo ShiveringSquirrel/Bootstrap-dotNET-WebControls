@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="test.aspx.cs" Inherits="CentUA.test" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="test.aspx.cs" Inherits="BootstrapControlsTest.test" %>
 
 <%@ Register Assembly="BootstrapControls" Namespace="BootstrapControls.Controls" TagPrefix="cc1" %>
 

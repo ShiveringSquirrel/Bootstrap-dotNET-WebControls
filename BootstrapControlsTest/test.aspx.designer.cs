@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CentUA {
+namespace BootstrapControlsTest {
     
     
     public partial class test {
