@@ -305,7 +305,7 @@ namespace BootstrapControls.Controls
 
             //If we have a placeholder and its a "chosen" dropdown, remove the text from the first item
             //Item is added when setting the placeholder property.
-            if (!string.IsNullOrEmpty(this.Placeholder) && AddChznClass)
+            if (!string.IsNullOrEmpty(this.Placeholder) && AddChznClass && !Page.IsPostBack)
             {
                 htmlWriter.AddAttribute("data-placeholder", this.Placeholder);
 
