@@ -291,7 +291,7 @@ namespace BootstrapControls.Controls
                 ListItem listItem = new ListItem(this.Placeholder, "");
                 listItem.Attributes.Add("disabled", null);
                 this.Items.Insert(0, listItem);
-                this.SelectedIndex = 0;
+        
                 if (AddChznClass)
                 {
                     htmlWriter.AddAttribute("data-placeholder", this.Placeholder);
