@@ -156,7 +156,10 @@ namespace BootstrapControls.Controls
             writer.AddAttribute("data-size", this.Size.ToString().ToLower());
             writer.AddAttribute("data-on-text", this.OnText);
             writer.AddAttribute("data-off-text", this.OffText);
-            writer.AddAttribute("data-label-text", this.Text);
+            if (!string.IsNullOrEmpty(this.Text))
+            {
+                writer.AddAttribute("data-label-text", this.Text);
+            }
             if (this.Disabled)
             {
                 writer.AddAttribute("disabled", null);
