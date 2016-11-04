@@ -220,6 +220,23 @@ namespace BootstrapControls.Controls
             }
         }
 
+        [Category("Appearance")]
+        [Browsable(true)]
+        [Description("Paste as plain text (strip HTML).")]
+        [Localizable(false)]
+        [DefaultValue("")]
+        public bool PasteAsPlainText
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("PasteAsPlainText", false);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("PasteAsPlainText", value);
+            }
+        }
+
         public TinymceEditor()
         {
             this.TextMode = TextBoxMode.MultiLine; //Renders text area
@@ -281,7 +298,7 @@ namespace BootstrapControls.Controls
 
             sb.Append("</div>");
             sb.Append(Environment.NewLine);
-
+                        
             string initScript = @"
                     tinymce.init(
                     {
@@ -296,6 +313,7 @@ namespace BootstrapControls.Controls
                         theme: '" + this.Theme + @"',
                         plugins: '" + this.Plugins + @"',
                         language: '" + this.Language + @"',
+                        paste_as_text: " + this.PasteAsPlainText.ToString().ToLower() + @",
                         skin: '" + this.Skin + @"'
                     });";
 
