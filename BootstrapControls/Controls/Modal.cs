@@ -85,6 +85,35 @@ namespace BootstrapControls.Controls
             }
 
             OnSubmitClicked();
+
+            if (CausesValidation && Page.IsValid)
+            {
+                ClearControl(this);
+            }
+        }
+
+        private void ClearControl(Control control)
+        {
+            var textbox = control as TextBox;
+            if (textbox != null)
+                textbox.Text = string.Empty;
+
+            var dropDownList = control as DropDownList;
+            if (dropDownList != null && dropDownList.Items.Count > 0)
+                dropDownList.SelectedIndex = 0;
+
+            var list = control as ListBox;
+            if (list != null && list.Items.Count > 0)
+                list.SelectedIndex = 0;
+
+            /*var file = control as FileUploader;
+            if (file != null)
+                file.cl;*/
+
+            foreach (Control childControl in control.Controls)
+            {
+                ClearControl(childControl);
+            }
         }
 
         ///// <summary>
