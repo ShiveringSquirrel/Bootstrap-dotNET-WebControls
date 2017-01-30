@@ -11,7 +11,7 @@ namespace BootstrapControls
     {
         internal static Control FindControlRecursive(this Control root, string id)
         {
-            if (root.ID == id)
+            if (root.ID == id || root.ClientID == id)
             {
                 return root;
             }
@@ -34,7 +34,9 @@ namespace BootstrapControls
             {
                 foreach (BaseValidator validator in control.Page.Validators)
                 {
-                    if (validator.ControlToValidate == control.ID && !validator.IsValid)
+                    if (validator.ControlToValidate == control.ID 
+                        && validator.Parent.ClientID == control.Parent.ClientID
+                        && !validator.IsValid)
                     {
                         ret = false;
                         break;
