@@ -150,6 +150,40 @@ namespace BootstrapControls.Controls
 
         [Category("Appearance")]
         [Browsable(true)]
+        [DefaultValue(true)]
+        [Description("Is there a submit button on this modal.")]
+        [Localizable(true)]
+        public bool HasSubmitButton
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("HasSubmitButton", true);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("HasSubmitButton", value);
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [DefaultValue("Submit")]
+        [Description("The text to display on the submit button of this modal.")]
+        [Localizable(true)]
+        public string SubmitButtonText
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("SubmitButtonText", "Submit");
+            }
+            set
+            {
+                ViewState.SetPropertyValue("SubmitButtonText", value);
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
         [DefaultValue("True")]
         [Description("Can the user close this window?")]
         [Localizable(true)]
@@ -285,18 +319,21 @@ namespace BootstrapControls.Controls
 
             sb = new StringBuilder();
 
-            var btnSubmit = new ButtonInput();
-            btnSubmit.ID = "btnSubmit";
-            btnSubmit.ButtonStyle = Enumerations.ButtonStyle.Primary;
-            btnSubmit.Text = "Submit";
-            btnSubmit.CausesValidation = this.CausesValidation;
-            if (!string.IsNullOrEmpty(this.ValidationGroup))
+            if (this.HasSubmitButton)
             {
-                btnSubmit.ValidationGroup = this.ValidationGroup;
+                var btnSubmit = new ButtonInput();
+                btnSubmit.ID = "btnSubmit";
+                btnSubmit.ButtonStyle = Enumerations.ButtonStyle.Primary;
+                btnSubmit.Text = this.SubmitButtonText;
+                btnSubmit.CausesValidation = this.CausesValidation;
+                if (!string.IsNullOrEmpty(this.ValidationGroup))
+                {
+                    btnSubmit.ValidationGroup = this.ValidationGroup;
+                }
+                btnSubmit.Click += new EventHandler(btnSubmit_Click);
+                //btnSubmit.OnClientClick = Page.ClientScript.GetPostBackEventReference(new PostBackOptions(this) { Argument = "SubmitClicked" });
+                Controls.Add(btnSubmit);
             }
-            btnSubmit.Click += new EventHandler(btnSubmit_Click);
-            //btnSubmit.OnClientClick = Page.ClientScript.GetPostBackEventReference(new PostBackOptions(this) { Argument = "SubmitClicked" });
-            Controls.Add(btnSubmit);
 
             sb.Append(Environment.NewLine);
 
