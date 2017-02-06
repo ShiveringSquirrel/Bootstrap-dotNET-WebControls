@@ -81,7 +81,7 @@ namespace BootstrapControls.Controls
         public override void RenderBeginTag(HtmlTextWriter writer)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("<div class=\"panel panel-default\">");
+            sb.Append("<div class=\"panel panel-default " + this.CssClass + "\">");
             sb.Append(Environment.NewLine);
 
             sb.Append("<div class=\"panel-heading\">");
