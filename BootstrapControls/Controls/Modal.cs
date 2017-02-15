@@ -262,7 +262,7 @@ namespace BootstrapControls.Controls
             else
             {
                 sb.Append("<div class=\"modal\" ");
-            }
+            }                       
 
             if (!CanClose)
             {
@@ -270,7 +270,15 @@ namespace BootstrapControls.Controls
             }
             sb.Append("id=\"" + this.ClientID + "\">");
             sb.Append(Environment.NewLine);
-            sb.Append("<div class=\"modal-dialog\">");
+            sb.Append("<div class=\"modal-dialog\"");
+
+            if (this.Width != null && !string.IsNullOrEmpty(this.Width.ToString()))
+            {
+                sb.Append(" style=\"width:" + this.Width + "\" ");
+            }
+
+            sb.Append(">");
+
             sb.Append(Environment.NewLine);
             sb.Append("<div class=\"modal-content\">");
             sb.Append(Environment.NewLine);
