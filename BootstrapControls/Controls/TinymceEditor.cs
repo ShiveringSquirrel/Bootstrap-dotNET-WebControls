@@ -188,6 +188,23 @@ namespace BootstrapControls.Controls
 
         [Category("Appearance")]
         [Browsable(true)]
+        [Description("The second toolbar items to display.")]
+        [Localizable(true)]
+        [DefaultValue("")]
+        public string Toolbar2
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("Toolbar2", "");
+            }
+            set
+            {
+                ViewState.SetPropertyValue("Toolbar2", value);
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
         [Description("The language to use in this editor.")]
         [Localizable(true)]
         [DefaultValue("en")]
@@ -234,6 +251,176 @@ namespace BootstrapControls.Controls
             set
             {
                 ViewState.SetPropertyValue("PasteAsPlainText", value);
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
+        [Description("This option allows you to disable the \"Powered by TinyMCE\" branding.")]
+        [Localizable(false)]
+        [DefaultValue(false)]
+        public bool DisableBranding
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("DisableBranding", false);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("DisableBranding", value);
+            }
+        }
+
+        [Category("Uploads")]
+        [Browsable(true)]
+        [Description("Image upload URL.")]
+        [Localizable(false)]
+        [DefaultValue("")]
+        public string ImageUploadUrl
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("ImageUploadUrl", "");
+            }
+            set
+            {
+                ViewState.SetPropertyValue("ImageUploadUrl", value);
+            }
+        }
+
+        [Category("Uploads")]
+        [Browsable(true)]
+        [Description("Disable converting of URLs")]
+        [Localizable(false)]
+        [DefaultValue(false)]
+        public bool ConvertUrls
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("ConvertUrls", false);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("ConvertUrls", value);
+            }
+        }        
+
+        [Category("Uploads")]
+        [Browsable(true)]
+        [Description("This option lets you specify a basepath to prepend to URLs returned from the configured ImageUploadUrl page.")]
+        [Localizable(false)]
+        [DefaultValue("")]
+        public string ImageUploadBasePath
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("ImageUploadBasePath", "");
+            }
+            set
+            {
+                ViewState.SetPropertyValue("ImageUploadBasePath", value);
+            }
+        }
+
+        [Category("Uploads")]
+        [Browsable(true)]
+        [Description("File Picker type ('file image media').")]
+        [Localizable(false)]
+        [DefaultValue("image")]
+        public string FilePickerTypes
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("FilePickerTypes", "image");
+            }
+            set
+            {
+                ViewState.SetPropertyValue("FilePickerTypes", value);
+            }
+        }
+
+        [Category("Uploads")]
+        [Browsable(true)]
+        [Description("Enable or disable automatic upload of images represented by data URLs or blob URIs.")]
+        [Localizable(false)]
+        [DefaultValue(false)]
+        public bool AutomaticUploads
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("AutomaticUploads", false);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("AutomaticUploads", value);
+            }
+        }
+
+        [Category("Uploads")]
+        [Browsable(true)]
+        [Description("his option enables you to add your own file or image browser to TinyMCE.")]
+        [Localizable(false)]
+        [DefaultValue("")]
+        public string FileBrowserCallback
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("FileBrowserCallback", "");
+            }
+            set
+            {
+                ViewState.SetPropertyValue("FileBrowserCallback", value);
+            }
+        }
+
+        [Category("Templating")]
+        [Browsable(true)]
+        [Description("This option lets you specify a predefined list of templates to be inserted by the user into the editable area. ")]
+        [Localizable(false)]
+        [DefaultValue(default(List<TinymceTemplate>))]
+        public List<TinymceTemplate> Templates
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("Templates", new List<TinymceTemplate>());
+            }
+            set
+            {
+                ViewState.SetPropertyValue("Templates", value);
+            }
+        }
+
+        [Category("Editing")]
+        [Browsable(true)]
+        [Description("This option allows you to force 'br' tag as a new line.")]
+        [Localizable(false)]
+        [DefaultValue(true)]
+        public bool ForceBRNewlines
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("ForceBRNewlines", true);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("ForceBRNewlines", value);
+            }
+        }
+
+        [Category("Editing")]
+        [Browsable(true)]
+        [Description("This option allows you to force 'p' tag as a new line.")]
+        [Localizable(false)]
+        [DefaultValue(false)]
+        public bool ForcePNewlines
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("ForcePNewlines", false);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("ForcePNewlines", value);
             }
         }
 
@@ -298,23 +485,45 @@ namespace BootstrapControls.Controls
 
             sb.Append("</div>");
             sb.Append(Environment.NewLine);
-                        
+
+            var templateStr = "";
+            if (this.Templates.Count > 0)
+            {
+                foreach (var template in this.Templates)
+                {
+                    templateStr += template.ToString() + ",";
+                }
+                templateStr = templateStr.Trim(',');
+                templateStr = "[" + templateStr + "]";
+            }
+
             string initScript = @"
                     tinymce.init(
                     {
                         selector: '#" + this.ClientID + @"',
                         encoding: 'xml',
                         entity_encoding : 'raw',
+                        convert_urls: " + this.ConvertUrls.ToString().ToLower() + @",
+                        force_br_newlines : " + this.ForceBRNewlines.ToString().ToLower() + @",
+                        force_p_newlines : " + this.ForcePNewlines.ToString().ToLower() + @",
                         fix_list_elements : true,"
-                        + ((!string.IsNullOrEmpty(this.Toolbar)) ? "toolbar: '" + this.Toolbar + "'," : "") +
+                        + ((!string.IsNullOrEmpty(this.Toolbar)) ? "toolbar1: '" + this.Toolbar + "'," : "")
+                        + ((!string.IsNullOrEmpty(this.Toolbar2)) ? "toolbar2: '" + this.Toolbar2 + "'," : "") +
                         @"forced_root_block: '',"
                         + ((!string.IsNullOrEmpty(this.ValidElements)) ? "valid_elements : '" + this.ValidElements + "'," : "") +
                         @"menubar: " + this.ShowMenuBar.ToString().ToLower() + @",
                         theme: '" + this.Theme + @"',
                         plugins: '" + this.Plugins + @"',
                         language: '" + this.Language + @"',
-                        paste_as_text: " + this.PasteAsPlainText.ToString().ToLower() + @",
-                        skin: '" + this.Skin + @"'
+                        file_picker_types: '" + this.FilePickerTypes + @"', 
+                        branding: " + (!this.DisableBranding).ToString().ToLower() + @",
+                        automatic_uploads: '" + this.AutomaticUploads.ToString().ToLower() + @"',
+                        paste_as_text: " + this.PasteAsPlainText.ToString().ToLower() + @", "
+                        + ((!string.IsNullOrEmpty(this.FileBrowserCallback)) ? "file_browser_callback: " + this.FileBrowserCallback + ", " : "")
+                        + ((!string.IsNullOrEmpty(this.ImageUploadUrl)) ? "images_upload_url: '" + this.ImageUploadUrl + "', " : "")
+                        + ((!string.IsNullOrEmpty(templateStr)) ? "templates: " + templateStr + ", " : "")
+                        + ((!string.IsNullOrEmpty(ImageUploadBasePath)) ? "images_upload_base_path: '" + this.ImageUploadBasePath + "', " : "") +
+                        @"skin: '" + this.Skin + @"'
                     });";
 
             sb.Append("<script>");
