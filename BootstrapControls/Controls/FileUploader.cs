@@ -71,6 +71,23 @@ namespace BootstrapControls.Controls
             }
         }
 
+        [Category("Appearance")]
+        [Browsable(true)]
+        [DefaultValue("image/png, image/jpeg, image/gif")]
+        [Description("Comma seperated list of the MIME type(s) this uploader accepts.")]
+        [Localizable(false)]
+        public string AcceptedMIMETypes
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("AcceptedMIMETypes", "image/png, image/jpeg, image/gif");
+            }
+            set
+            {
+                ViewState.SetPropertyValue("AcceptedMIMETypes", value);
+            }
+        }
+
         public byte[] GetData()
         {
             byte[] myData = new byte[0];
@@ -94,7 +111,7 @@ namespace BootstrapControls.Controls
             fileControl.ID = "filecontrol-" + this.ID;
             fileControl.Attributes.Add("type", "file");
             fileControl.Name = "input-file-preview-" + this.ID;
-            fileControl.Accept = "image/png, image/jpeg, image/gif";
+            fileControl.Accept = this.AcceptedMIMETypes;
             fileControl.Attributes.Add("style", "position: absolute; top: 0; right: 0; margin: 0; padding: 0; font-size: 20px; cursor: pointer; opacity: 0; filter: alpha(opacity = 0);");
             Controls.Add(fileControl);
             base.CreateChildControls();
