@@ -35,7 +35,7 @@ namespace BootstrapControls.Controls
 
         [Category("Appearance")]
         [Browsable(true)]
-        [DefaultValue("")]
+        [DefaultValue(false)]
         [Description("Use this control for tag input.")]
         [Localizable(false)]
         public bool TagInput
