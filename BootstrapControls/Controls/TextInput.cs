@@ -335,7 +335,7 @@ namespace BootstrapControls.Controls
                 TextWriter txtWriter = new StringWriter();
                 HtmlTextWriter htmlWriter = new HtmlTextWriter(txtWriter);
 
-                htmlWriter.AddAttribute(HtmlTextWriterAttribute.Class, "form-control");
+                htmlWriter.AddAttribute(HtmlTextWriterAttribute.Class, ("form-control " + this.CssClass).Trim());
 
                 if (!String.IsNullOrEmpty(this.Placeholder))
                 {
