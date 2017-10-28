@@ -83,11 +83,11 @@ namespace BootstrapControls.Controls
 
             if (UsePillsInsteadOfTabs)
             {
-                sb.Append("<ul class=\"nav nav-pills\" role=\"tablist\">");
+                sb.Append("<ul class=\"nav nav-pills " + this.CssClass + "\" role=\"tablist\">");
             }
             else
             {
-                sb.Append("<ul class=\"nav nav-tabs\" role=\"tablist\">");
+                sb.Append("<ul class=\"nav nav-tabs" + this.CssClass + "\" role=\"tablist\">");
             }
 
             //The first control is our textbox, the second our placeholder
