@@ -282,6 +282,12 @@ namespace BootstrapControls.Controls
             {
                 cssSelectClass += " chzn-select";
             }
+
+            if (!string.IsNullOrEmpty(this.Attributes["class"]))
+            {
+                cssSelectClass += $" {this.Attributes["class"]}";
+            }
+
             htmlWriter.AddAttribute(HtmlTextWriterAttribute.Class, cssSelectClass);
 
             //If we have a placeholder and its a "chosen" dropdown, remove the text from the first item
