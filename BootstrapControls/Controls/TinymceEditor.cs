@@ -424,6 +424,23 @@ namespace BootstrapControls.Controls
             }
         }
 
+        [Category("Configuration")]
+        [Browsable(true)]
+        [Description("Add a custom configuration script to the init function.")]
+        [Localizable(false)]
+        [DefaultValue("")]
+        public string CustomSetupScript
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("CustomSetupScript", "");
+            }
+            set
+            {
+                ViewState.SetPropertyValue("CustomSetupScript", value);
+            }
+        }
+
         public TinymceEditor()
         {
             this.TextMode = TextBoxMode.MultiLine; //Renders text area
@@ -508,7 +525,8 @@ namespace BootstrapControls.Controls
                         force_p_newlines : " + this.ForcePNewlines.ToString().ToLower() + @",
                         fix_list_elements : true,"
                         + ((!string.IsNullOrEmpty(this.Toolbar)) ? "toolbar1: '" + this.Toolbar + "'," : "")
-                        + ((!string.IsNullOrEmpty(this.Toolbar2)) ? "toolbar2: '" + this.Toolbar2 + "'," : "") +
+                        + ((!string.IsNullOrEmpty(this.Toolbar2)) ? "toolbar2: '" + this.Toolbar2 + "'," : "")
+                        + ((!string.IsNullOrEmpty(this.CustomSetupScript)) ? "setup: " + this.CustomSetupScript + "," : "") +
                         @"forced_root_block: '',"
                         + ((!string.IsNullOrEmpty(this.ValidElements)) ? "valid_elements : '" + this.ValidElements + "'," : "") +
                         @"menubar: " + this.ShowMenuBar.ToString().ToLower() + @",
