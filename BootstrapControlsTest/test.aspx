@@ -15,7 +15,7 @@
     <link href="Content/chosen.css" rel="stylesheet" />
     <link href="Content/chosen.bootstrap.css" rel="stylesheet" />
 
-    <script src="Scripts/jquery-2.1.4.min.js"></script>
+    <script src="Scripts/jquery-2.2.4.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/bootstrap-switch.min.js"></script>
     <script src="Scripts/moment-with-locales.min.js"></script>
