@@ -39,6 +39,23 @@ namespace BootstrapControls.Controls
 
         [Category("Appearance")]
         [Browsable(true)]
+        [DefaultValue(false)]
+        [Description("Hide preview, only useful for images.")]
+        [Localizable(false)]
+        public bool HidePreview
+        {
+            get
+            {
+                return ViewState.GetPropertyValue("HidePreview", false);
+            }
+            set
+            {
+                ViewState.SetPropertyValue("HidePreview", value);
+            }
+        }
+
+        [Category("Appearance")]
+        [Browsable(true)]
         [DefaultValue("fa fa-asterisk text-danger")]
         [Description("What is the icon class to use when field is required.")]
         [Localizable(false)]
@@ -102,7 +119,7 @@ namespace BootstrapControls.Controls
         }
 
         public FileUploader()
-        {            
+        {
         }
 
         protected override void CreateChildControls()
@@ -129,7 +146,7 @@ namespace BootstrapControls.Controls
             {
                 cssGroupClass += " has-error";
             }*/
-            
+
             sb.Append("<div class=\"");
             sb.Append(cssGroupClass);
             sb.Append("\">");
@@ -154,7 +171,7 @@ namespace BootstrapControls.Controls
 
             string imagePreviewId = Guid.NewGuid().ToString("N");
 
-            sb.Append("<div class=\"input-group\" id=\""+ imagePreviewId + "\">");
+            sb.Append("<div class=\"input-group\" id=\"" + imagePreviewId + "\">");
             sb.Append("<input type=\"text\" class=\"form-control\" id=\"" + imagePreviewId + "-filename\" disabled=\"disabled\">");
 
             sb.Append("<span class=\"input-group-btn\">");
@@ -171,13 +188,26 @@ namespace BootstrapControls.Controls
 
             sb.Append(Environment.NewLine);
             sb.Append("<script>");
+
+            sb.Append("var showPopUp = ");
+            if (this.HidePreview)
+            {
+                sb.Append("false;");
+            }
+            else
+            {
+                sb.Append("true;");
+            }
+
             sb.Append(Environment.NewLine);
 
             sb.Append(@"$(document).on('click', '#" + closeButtonId + @"', function () {
                             $('#" + imagePreviewId + @"').popover('hide');
                             $('#" + imagePreviewId + @"').hover(
                                 function() {
-                                    $('#" + imagePreviewId + @"').popover('show');
+                                    if(showPopUp) {
+                                        $('#" + imagePreviewId + @"').popover('show');
+                                    }
                                 },
                                 function() {
                                     $('#" + imagePreviewId + @"').popover('hide');
@@ -188,57 +218,59 @@ namespace BootstrapControls.Controls
 
             sb.Append(Environment.NewLine);
 
-            sb.Append(@"$(function() {
+                sb.Append(@"$(function() {
 
-                // Create the close button
-                var closebtn = $('<button/>', {
-                    type: ""button"",
-                    text: 'x',
-                    id: '" + closeButtonId + @"',
-                    style: 'font-size: initial;',
-                });
+                    // Create the close button
+                    var closebtn = $('<button/>', {
+                        type: ""button"",
+                        text: 'x',
+                        id: '" + closeButtonId + @"',
+                        style: 'font-size: initial;',
+                    });
                 closebtn.attr(""class"", ""close pull-right"");
-                
+            
                 // Set the popover default content
-                $('#" + imagePreviewId + @"').popover({
-                    trigger: 'manual',
-                     html: true,
-                    title: ""<strong>Preview</strong>"" + $(closebtn)[0].outerHTML,
-                    content: ""There's no image"",
-                    placement: 'bottom'
+                    $('#" + imagePreviewId + @"').popover({
+                        trigger: 'manual',
+                         html: true,
+                        title: ""<strong>Preview</strong>"" + $(closebtn)[0].outerHTML,
+                        content: ""There's no image"",
+                        placement: 'bottom'
                 });
 
                 // Clear event
-                $('#" + imagePreviewId + @"-clear').click(function () {
-                    $('#" + imagePreviewId + @"').attr(""data-content"", """").popover('hide');
-                    $('#" + imagePreviewId + @"-filename').val("""");
-                    $('#" + imagePreviewId + @"-clear').hide();
-                    $('#" + imagePreviewId + @"-input input:file').val("""");
-                    $('#" + imagePreviewId + @"-input-title').text(""Browse"");
+                    $('#" + imagePreviewId + @"-clear').click(function () {
+                        $('#" + imagePreviewId + @"').attr(""data-content"", """").popover('hide');
+                        $('#" + imagePreviewId + @"-filename').val("""");
+                        $('#" + imagePreviewId + @"-clear').hide();
+                        $('#" + imagePreviewId + @"-input input:file').val("""");
+                        $('#" + imagePreviewId + @"-input-title').text(""Browse"");
                 });
 
                 // Create the preview image
-                $('#" + imagePreviewId + @"-input input:file').change(function () {
-                    var img = $('<img/>', {
-                        id: 'dynamic',
-                        width: '250',
-                        height: 'auto'
-                    });
-                    var file = this.files[0];
-                    var reader = new FileReader();
+                    $('#" + imagePreviewId + @"-input input:file').change(function () {
+                        var img = $('<img/>', {
+                            id: 'dynamic',
+                            width: '250',
+                            height: 'auto'
+                        });
+                        var file = this.files[0];
+                        var reader = new FileReader();
                     
-                    // Set preview image into the popover data-content
-                    reader.onload = function(e) {
-                        $('#" + imagePreviewId + @"-title').text(""Change"");
-                        $('#" + imagePreviewId + @"-clear').show();
-                        $('#" + imagePreviewId + @"-filename').val(file.name);
-                        img.attr('src', e.target.result);
-                        $('#" + imagePreviewId + @"').attr('data-content', $(img)[0].outerHTML).popover('show');
-                        }
-                        reader.readAsDataURL(file);
+                        // Set preview image into the popover data-content
+                        reader.onload = function(e) {
+                                $('#" + imagePreviewId + @"-title').text(""Change"");
+                                $('#" + imagePreviewId + @"-clear').show();
+                                $('#" + imagePreviewId + @"-filename').val(file.name);
+                                img.attr('src', e.target.result);
+                                if(showPopUp) {
+                                    $('#" + imagePreviewId + @"').attr('data-content', $(img)[0].outerHTML).popover('show');
+                                }
+                            }
+                            reader.readAsDataURL(file);
+                        });
                     });
-                });
-            ");
+                ");
 
             sb.Append("</script>");
 
